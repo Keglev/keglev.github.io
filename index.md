@@ -4,8 +4,8 @@
 
 ### Category Name 1 
 
-[Project 1 Title](/sample_page)
-<img src="images/Rents in Germany(1).jpg?raw=true"/>
+[Rent Prices in Germany](/sample_page)
+<img src="images/Rents in Germany(1).png?raw=true"/>
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
