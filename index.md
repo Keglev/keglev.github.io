@@ -4,25 +4,25 @@
 
 ### Data Visualization with Tableau and Python 
 
-[Rent Prices in Germany](/sample_page)
+[Rent Apartment Prices in Germany](/sample_page)
 <img src="images/Rents in Germany(1).png?raw=true"/>
 
 ---
-[Project 2 Title](/pdf/sample_presentation.pdf)
+[Supermarket Marketing Analysis](/pdf/sample_presentation.pdf)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[Project 3 Title](http://example.com/)
+[Streaming Sales - project in SQL](http://example.com/)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
 
 ### Category Name 2
 
-- [Project 1 Title](http://example.com/)
-- [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
-- [Project 4 Title](http://example.com/)
+- [Rent Apartment Prices in Germany](http://example.com/)
+- [Supermarket Marketing Analysis](http://example.com/)
+- [PStreaming Sales - Project in SQL](http://example.com/)
+- [Influenza Vaccinations in USA](http://example.com/)
 - [Project 5 Title](http://example.com/)
 
 ---
