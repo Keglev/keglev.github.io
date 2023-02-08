@@ -2,7 +2,7 @@
 
 ---
 
-### Category Name 1 
+### Data Visualization with Tableau and Python 
 
 [Rent Prices in Germany](/sample_page)
 <img src="images/Rents in Germany(1).png?raw=true"/>
