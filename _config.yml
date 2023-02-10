@@ -6,10 +6,11 @@ description: > # your text below (remove <br> elements if you don't need line br
   in Business Administration.
   <br><br>
   Skilled in tools such as Tableau, MS Power BI 
-  <br><br>
+  <br>
   Python and SQL Expert    
-  <br><br>
-  <a href= "https://www.linkedin.com/in/carloskeglevich/" >View My LinkedIn Profile</a> 
+  <br>
+  <a href= "https://www.linkedin.com/in/carloskeglevich/" >View My LinkedIn Profile</a> 7
+  <br>
   <a href= "https://github.com/Keglev/" >View GitHub Repo</a> 
 theme: jekyll-theme-minimal
 google_analytics: G-NSTWR76ZKB # your Google Analytics tracking ID here
