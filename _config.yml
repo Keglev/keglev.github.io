@@ -1,10 +1,10 @@
 title: Carlos Keglevich # your name (or website title) here
 logo: "/images/IMG_2811.jpg?raw=true" # your photo (or logo) here
 description: > # your text below (remove <br> elements if you don't need line breaks)
-  <br><br>
+  <br>
   Data Analysist with a bachelor’s degree  
   in Business Administration.
-  <br><br>
+  <br>
   Skilled in tools such as Tableau, MS Power BI 
   <br>
   Python and SQL Expert    
@@ -12,5 +12,6 @@ description: > # your text below (remove <br> elements if you don't need line br
   <a href= "https://www.linkedin.com/in/carloskeglevich/" >View My LinkedIn Profile</a> 7
   <br>
   <a href= "https://github.com/Keglev/" >View GitHub Repo</a> 
+  <br>
 theme: jekyll-theme-minimal
 google_analytics: G-NSTWR76ZKB # your Google Analytics tracking ID here
