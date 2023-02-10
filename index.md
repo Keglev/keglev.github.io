@@ -5,7 +5,7 @@
 ### Data Visualization with Tableau and Python 
 
 [Rent Apartment Prices in Germany](/sample_page)
-<img src="images/Rents in Germany(1).png?raw=true"/>
+<img src="images/Rents in Germany (1).png?raw=true"/>
 
 ---
 [Supermarket Marketing Analysis](/pdf/sample_presentation.pdf)
