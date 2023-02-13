@@ -9,6 +9,7 @@
 
 ---
 [Supermarket Marketing Analysis](/pdf/sample_presentation.pdf)
+<br>
 <img src="images/ex4_10_line_order_value_day.png?raw=true"/>
 <img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
