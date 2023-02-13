@@ -9,8 +9,8 @@
 
 ---
 [Supermarket Marketing Analysis](/pdf/sample_presentation.pdf)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
+<img src="images/ex4_10_line_order_value_day.png?raw=true"/>
+<img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
 [Streaming Sales - project in SQL](http://example.com/)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
