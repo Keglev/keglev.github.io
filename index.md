@@ -17,7 +17,7 @@
 <br>
 [Streaming Sales - SQL Data Dictionary](/pdf/Rockbuster Data Dictionary.pdf)
 <br>
-[Streaming Sales - Powerpoint presentation]/pdf/Rockbuster-Stealth-Data-Analysis.pdf)
+[Streaming Sales - Powerpoint presentation](/pdf/Rockbuster-Stealth-Data-Analysis.pdf)
 <br>
 <img src="images/Revenue by Genre.png?raw=true"/>
 <br>
