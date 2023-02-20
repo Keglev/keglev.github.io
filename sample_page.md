@@ -31,7 +31,7 @@ corr = sns.heatmap(sub.corr(), annot = True, ax = ax) # The `annot` argument all
 #place the correlation coefficients onto the heatmap.
 ```
 
-### 2. There is also a option to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
+### 2. There is also a option of a category map to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
 
 ```# Create a categorical plot in seaborn using the price categories created above
 
