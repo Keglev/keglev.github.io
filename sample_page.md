@@ -19,30 +19,31 @@ The Data passed through the following techniques:
 - the heat type can have a impact in rent?
 - How much the rent in a certain city can impact the total rent value?
 
-### 1. 
+### 1. Creating correlation map in Seaborn library:
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+Some of the business questions needs to analyse if some variables have correlations. One of them is as follows: 
 
-```javascript
-if (isAwesome){
-  return true
-}
+```# Create a subplot with matplotlib
+f,ax = plt.subplots(figsize=(10,10))
+
+# Create the correlation heatmap in seaborn by applying a heatmap onto the correlation matrix and the subplots defined above.
+corr = sns.heatmap(sub.corr(), annot = True, ax = ax) # The `annot` argument allows the plot to 
+#place the correlation coefficients onto the heatmap.
 ```
 
-### 2. Assess assumptions on which statistical inference will be based
+### 2. There is also a option to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
 
-```javascript
-if (isAwesome){
-  return true
-}
+```# Create a categorical plot in seaborn using the price categories created above
+
+sns.set(style="ticks")
+df_immo_clean = df_immo_clean.sort_values(by=['noRooms'])
+
+g = sns.catplot(x="noRooms", y="livingSpace", hue='Price category', data=df_immo_clean)
 ```
 
-### 3. Support the selection of appropriate statistical tools and techniques
+### 3. Here is the Categorical plot map in Seaborn:
 
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
-### 4. Provide a basis for further data collection through surveys or experiments
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
