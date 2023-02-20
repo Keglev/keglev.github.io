@@ -8,7 +8,7 @@
 <img src="images/Rents in Germany (1).png?raw=true"/>
 
 ---
-[Supermarket Marketing Analysis](/sample_page)
+[Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
 <br>
 <img src="images/ex4_10_line_order_value_day.png?raw=true"/>
 ---
@@ -31,10 +31,9 @@
 
 ### Category Name 2
 
-- [Rent Apartment Prices in Germany](http://example.com/)
-- [Supermarket Marketing Analysis](http://example.com/)
-- [PStreaming Sales - Project in SQL](http://example.com/)
-- [Influenza Vaccinations in USA](http://example.com/)
+- [Rent Apartment Prices in Germany](https://github.com/Keglev/Germany-Rental-prices)
+- [Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project)
+- [PStreaming Sales - Project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 - [Project Comming soon](http://example.com/)
 
 ---
