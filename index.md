@@ -14,13 +14,15 @@
 <img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
 <br>
+---
 ### SQL Project in Postgres and Tableau
 <br>
+---
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <br>
-[Streaming Sales - SQL Data Dictionary](/pdf/Rockbuster Data dictionary.pdf)
+[Streaming Sales - SQL Data Dictionary](keglev.github.io/pdf/Rockbuster Data dictionary.pdf)
 <br>
-[Streaming Sales - Powerpoint presentation](/pdf/Rockbuster-Stealth-Data-Analisys.pdf)
+[Streaming Sales - Powerpoint presentation](keglev.github.io/pdf/Rockbuster-Stealth-Data-Analisys.pdf)
 <br>
 <img src="images/Revenue by Genre.png?raw=true"/>
 <br>
