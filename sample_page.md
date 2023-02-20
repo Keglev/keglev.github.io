@@ -23,27 +23,9 @@ The Data passed through the following techniques:
 
 Some of the business questions needs to analyse if some variables have correlations. One of them is as follows: 
 
-```# Create a subplot with matplotlib
-f,ax = plt.subplots(figsize=(10,10))
-
-# Create the correlation heatmap in seaborn by applying a heatmap onto the correlation matrix and the subplots defined above.
-corr = sns.heatmap(sub.corr(), annot = True, ax = ax) # The `annot` argument allows the plot to 
-#place the correlation coefficients onto the heatmap.
-```
-
 <img src="/images/correlationheatmap.png?raw=true"/>
 
 ### 2. There is also a option of a category map to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
-
-```# Create a categorical plot in seaborn using the price categories created above
-
-sns.set(style="ticks")
-df_immo_clean = df_immo_clean.sort_values(by=['noRooms'])
-
-g = sns.catplot(x="noRooms", y="livingSpace", hue='Price category', data=df_immo_clean)
-```
-
-### 3. Here is the Categorical plot map in Seaborn:
 
 <img src="/images/categoricalplot.png?raw=true"/>
 
