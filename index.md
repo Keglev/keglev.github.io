@@ -15,7 +15,7 @@
 ---
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <br>
-[Streaming Sales - SQL Data Dictionary](/pdf/Rockbuster Data Dictionary.pdf)
+[Streaming Sales - SQL Data Dictionary](/pdf/Rockbuster Data dictionary.pdf)
 <br>
 [Streaming Sales - Powerpoint presentation](/pdf/Rockbuster-Stealth-Data-Analysis.pdf)
 <br>
