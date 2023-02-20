@@ -14,7 +14,8 @@
 <img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
 [Streaming Sales - project in SQL](http://example.com/)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+<img src="images/Revenue by Genre.png?raw=true"/>
+<img src="images/Global Distribution of Customers.png
 
 ---
 
