@@ -22,11 +22,11 @@ The Data passed through the following techniques:
 ### 1. Creating correlation map in Seaborn library:
 
 Some of the business questions needs to analyse if some variables have correlations. One of them is as follows: 
-
+<br>
 <img src="/images/correlationheatmap.png?raw=true"/>
 
 ### 2. There is also a option of a category map to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
-
+<br>
 <img src="/images/categoricalplot.png?raw=true"/>
 
 
