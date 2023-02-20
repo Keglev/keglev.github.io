@@ -13,9 +13,9 @@
 <img src="images/ex4_10_line_order_value_day.png?raw=true"/>
 <img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
-[Streaming Sales - project in SQL](http://example.com/)
+[Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <img src="images/Revenue by Genre.png?raw=true"/>
-<img src="images/Global Distribution of Customers.png
+<img src="images/Global Distribution of Customers.png?raw=true"/>
 
 ---
 
