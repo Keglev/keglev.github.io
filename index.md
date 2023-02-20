@@ -14,8 +14,11 @@
 <img src="images/histogram_hour_4_9.png?raw=true"/>
 ---
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
+<br>
 [Streaming Sales - SQL Data Dictionary](/pdf/Rockbuster Data Dictionary.pdf)
+<br>
 [Streaming Sales - Powerpoint presentation]/pdf/Rockbuster-Stealth-Data-Analysis.pdf)
+<br>
 <img src="images/Revenue by Genre.png?raw=true"/>
 <br>
 <img src="images/Global Distribution of Customers.png?raw=true"/>
