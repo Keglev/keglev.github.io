@@ -8,7 +8,7 @@
 <img src="images/Rents in Germany (1).png?raw=true"/>
 
 ---
-[Supermarket Marketing Analysis](/pdf/sample_presentation.pdf)
+[Supermarket Marketing Analysis](/sample_page)
 <br>
 <img src="images/ex4_10_line_order_value_day.png?raw=true"/>
 <img src="images/histogram_hour_4_9.png?raw=true"/>
