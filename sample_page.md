@@ -8,12 +8,16 @@ The Data passed through the following techniques:
  - Accessment the Data
  - Cleaning the missing and irrelevant values
  - wrangling data
- - analysis Using the Python libraries: Matplotlib, Seaborn
- - drawing conlcusions and making a Tableau presentation
+ - analysis using the Python libraries: Matplotlib, Seaborn
+ - drawing conclusions and making a Tableau presentation
 
 ## Business questions
 
-
+- The size of the apartment impacts the value?
+- The numnber of rooms can impact a rent value?
+- new constructions can be higher in value for the same apartment type or not?
+- the heat type can have a impact in rent?
+- How much the rent in a certain city can impact the total rent value?
 
 ### 1. 
 
