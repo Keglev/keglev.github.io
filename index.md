@@ -6,6 +6,7 @@
 - This project is to show trends in rent prices in apartments through Germany. 
 - The idea was to help investors and general public to be aware of rent
 - changes in the apartment, no matter their location. 
+<br>
 [Rent Apartment Prices in Germany](/sample_page)
 <img src="images/Rents in Germany (1).png?raw=true"/>
 
