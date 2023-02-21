@@ -16,7 +16,6 @@
 ---
 ### SQL Project in Postgres and Tableau
 <br>
----
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <br>
 [Streaming Sales - SQL Data Dictionary](keglev.github.io/pdf/Rockbuster Data dictionary.pdf)
@@ -29,11 +28,11 @@
 
 ---
 
-### Category Name 2
+### Project Lists:
 
 - [Rent Apartment Prices in Germany](https://github.com/Keglev/Germany-Rental-prices)
 - [Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project)
-- [PStreaming Sales - Project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
+- [Streaming Sales - Project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 - [Project Comming soon](http://example.com/)
 
 ---
