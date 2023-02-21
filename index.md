@@ -4,8 +4,12 @@
 
 ### Data Visualization with Tableau and Python 
 
+# This project is to show trends in rent prices in apartments through Germany. 
+# The idea was to help investors and general public to be aware of rent
+# changes in the apartment, no matter their location. 
 [Rent Apartment Prices in Germany](/sample_page)
 <img src="images/Rents in Germany (1).png?raw=true"/>
+
 
 ---
 [Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
