@@ -20,7 +20,12 @@ This project is to show the consumer behavior in a well-known online supermarket
 ---
 ### SQL Project in Postgres and Tableau
 <br>
-This project shows how to filter data from a larger dataset using SQL and data Stored in a Postgres server. This shows the relevancy of SQL for filtering data and analysing the results in Tableau.  
+The objective of this project is to answer top commom business cases to stackholders:
+- What are the 5 top countries with the top users?
+- What is the average revenue from gender and which movies is the most rented?
+To answer these questions, I used SQL to filter data from a larger dataset and data Stored in a Postgres server. This shows the relevancy of SQL for filtering data for business purposes and analysing the results in Tableau.
+Since there are a clear deadline to answer these questions, I faced many issues regarding the fact that some of the questions can be challenged to answer, for example, the top user maybe not come from the top countries witht he most revenue. So I need to filter with different queries to get the results. 
+
 <br>
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <br>
