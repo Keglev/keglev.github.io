@@ -24,10 +24,14 @@ The Data passed through the following techniques:
 Some of the business questions needs to analyse if some variables have correlations. One of them is as follows: 
 <br>
 <img src="/images/correlationheatmap.png?raw=true"/>
+<br>
+Based in this graph, certain features have a strong correlaction with the price, and others not. 
 
 ### 2. There is also a option of a category map to see if an apartment from a certain number of rooms is cheaper or expensive compared to the average market:
 <br>
 <img src="/images/categoricalplot.png?raw=true"/>
+<br>
+this can be helpful to see why these apartments rent are more expensive than others. based on this, it is possible to seee that even before of the pandemic of 2020-2021 there wasa trend in more expensive rent price in apartments through Germany.  
 
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
