@@ -15,6 +15,7 @@ The idea was to help investors and general public to be aware of rent changes in
 [Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
 <br>
 This project is to show the consumer behavior in a well-known online supermarket store, named Instacart. This project is made in python, and shows how a large dataset can be analysed and get insights from consumer behavior on it. Some of proposed business questions was:
+<br>
 - To find out the heavy user profile - if they are single, married or have kids
 - the most departments visited by the customers
 - if there were differences in expendidure between different regions
@@ -30,8 +31,8 @@ The objective of this project is to answer top commom business cases to stackhol
 
 - What are the 5 top countries with the top users?
 - What is the average revenue from gender and which movies is the most rented?
-- 
-To answer these questions, I used SQL to filter data from a larger dataset and data Stored in a Postgres server. This shows the relevancy of SQL for filtering data for business purposes and analysing the results in Tableau.
+<br><br>
+To answer these questions, I used SQL to filter data from a larger dataset and data Stored in a Postgres server. This shows the relevancy of SQL for filtering data for business purposes and analysing the results in Tableau.<br>
 Since there are a clear deadline to answer these questions, I faced many issues regarding the fact that some of the questions can be challenged to answer, for example, the top user maybe not come from the top countries witht he most revenue. So I need to filter with different queries to get the results. 
 
 <br>
