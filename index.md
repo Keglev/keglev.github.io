@@ -29,9 +29,9 @@ Since there are a clear deadline to answer these questions, I faced many issues 
 <br>
 [Streaming Sales - project in SQL](https://github.com/Keglev/SQL_Rockbuster_Project/)
 <br>
-[Streaming Sales - SQL Data Dictionary](keglev.github.io/pdf/Rockbuster Data dictionary.pdf)
+[Streaming Sales - SQL Data Dictionary](https://keglev.github.io/pdf/Rockbuster Data dictionary.pdf)
 <br>
-[Streaming Sales - Powerpoint presentation](keglev.github.io/pdf/Rockbuster-Stealth-Data-Analisys.pdf)
+[Streaming Sales - Powerpoint presentation](https://keglev.github.io/pdf/Rockbuster-Stealth-Data-Analisys.pdf)
 <br>
 <img src="images/Revenue by Genre.png?raw=true"/>
 <br>
