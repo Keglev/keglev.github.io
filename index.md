@@ -14,7 +14,7 @@ The idea was to help investors and general public to be aware of rent changes in
 [Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
 <br>
 This project is to show the consumer behavior in a well-known online supermarket store, named Instacart. This project is made in python, and shows how a large dataset can be analysed and get insights from consumer behavior on it. 
-<img src="images/ex4_10_line_order_value_day.png?raw=true"/>
+<img src="images/ex4_10_bar_dep_price.png?raw=true"/>
 ---
 <br>
 ---
