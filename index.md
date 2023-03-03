@@ -2,10 +2,9 @@
 
 ---
 
-### Data Visualization with Tableau and Python 
+## Data Visualization with Tableau and Python 
 <br>
-<br>
-## Trends in prices for apartment rents in Germany
+### Trends in prices for apartment rents in Germany
 
 This project is to show trends in rent prices in apartments through Germany. <br>
 The idea was to help investors and public to be aware of rent changes in the apartment, no matter their location. The main question is why some apartments are more expensive, despite they have the same size and are located in the same city.
@@ -29,7 +28,6 @@ This project is to show the consumer behavior in a well-known online supermarket
 <img src="images/ex4_10_bar_dep_price.png?raw=true"/>
 ---
 <br>
----
 ### SQL Project in Postgres and Tableau
 <br>
 The objective of this project is to answer top common business cases to stack holders:
@@ -46,6 +44,7 @@ Since there are a clear deadline to answer these questions, I faced many issues 
 [Streaming Sales - SQL Data Dictionary](https://keglev.github.io/pdf/Rockbuster Data dictionary.pdf)
 <br>
 [Streaming Sales - PowerPoint presentation](https://keglev.github.io/pdf/Rockbuster-Stealth-Data-Analisys.pdf)
+<br>
 <br>
 <img src="images/Global Distribution of Customers.png?raw=true"/>
 
