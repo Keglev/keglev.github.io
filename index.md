@@ -27,8 +27,6 @@ The idea was to help investors and public to be aware of rent changes in the apa
 ---
 ### Supermarket marketing Analysis
 <br>
-[GitHub Python Code for Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
-<br>
 <br>
 This project is to show the consumer behavior in a well-known online supermarket store, named Instacart. This project is made in python, and shows how a large dataset can be analyzed and get insights from consumer behavior on it. Some of the proposed business questions were:
 <br>
@@ -36,6 +34,8 @@ This project is to show the consumer behavior in a well-known online supermarket
 - the most departments visited by the customers
 - if there were differences in expenditure between different regions
 - what was the most busy time of the day for customers, and which day of the week most consumers used the store. 
+<br>
+[GitHub Python Code for Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
 <br>
 <img src="images/ex4_10_bar_dep_price.png?raw=true"/>
 ---
@@ -68,13 +68,15 @@ The objective os this project is to verify if there is a need of staff reinforce
 
 - The project only uses a Excell file, extracted from CDC Data Bank in the USA
 - The project analyses the deaths by influenza, and also the hospital attendances due to Influenza.
-
+<br>
+[Tableau Presentation of Influenza Project](https://public.tableau.com/app/profile/carlos.keglevich/viz/InfluenzaStoryboard_16623907140830/USAvsInfluenza)
+<br>
 <img src="images/USA vs Influenza.png"/>
 ---
 <br>
-To answer the need of reinforecement of staff, it just analysed the Excel file with Tableau. Several conclusions were made and the report is available through the Tableau link bellow.
+To answer the need of reinforecement of staff, it just analysed the Excel file with Tableau. Several conclusions were made and the report is available through the Tableau link above the image.
 <br>
-[Tableau Presentation of Influenza Project](https://public.tableau.com/app/profile/carlos.keglevich/viz/InfluenzaStoryboard_16623907140830/USAvsInfluenza)
+
 
 
 
