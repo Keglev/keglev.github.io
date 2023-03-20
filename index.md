@@ -11,11 +11,18 @@ The idea was to help investors and public to be aware of rent changes in the apa
 <br><br>
 [Rent Apartment Prices in Germany](/sample_page)
 <br>
+[Tableau Presentation](https://public.tableau.com/app/profile/carlos.keglevich/viz/RentProject/RentsinGermany)
+<br>
+[GitHub Python code for the Project](https://github.com/Keglev/Germany-Rental-prices)
 <img src="images/Rents in Germany (1).png?raw=true"/>
+<br>
+
 
 
 ---
-[Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
+### Supermarket marketing Analysis
+<br>
+[GitHub Python Code for Supermarket Marketing Analysis](https://github.com/Keglev/Instacart_project/)
 <br>
 <br>
 This project is to show the consumer behavior in a well-known online supermarket store, named Instacart. This project is made in python, and shows how a large dataset can be analyzed and get insights from consumer behavior on it. Some of the proposed business questions were:
@@ -47,15 +54,6 @@ Since there are a clear deadline to answer these questions, I faced many issues 
 <br>
 <br>
 <img src="images/Global Distribution of Customers.png?raw=true"/>
-
----
-
-### Project Lists:
-<br>
-More projects will be done over time
-<br>
-
-- [Project Comming soon](http://example.com/)
 
 ---
 
