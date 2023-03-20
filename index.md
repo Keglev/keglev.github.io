@@ -7,13 +7,18 @@
 ### Trends in prices for apartment rents in Germany
 
 This project is to show trends in rent prices in apartments through Germany. <br>
-The idea was to help investors and public to be aware of rent changes in the apartment, no matter their location. The main question is why some apartments are more expensive, despite they have the same size and are located in the same city.
+The idea was to help investors and public to be aware of rent changes in the apartment, no matter their location. The main question is why some apartments are more expensive, despite they have the same size and are located in the same city. The aim is to provide information to people, who decide to buy an apartment for rent purposes. Some of the business questions are:
+<br>
+- Is it possible to know in advance why an apartment located in the same city with the same size have different rent values?
+- Is it possible to know in advance if an apartment will need renovation os not?
+- is there a key factor to determine if an apartment located in the same city is more expensive? or is it only depends of the location?
 <br><br>
-[Rent Apartment Prices in Germany](/sample_page)
+[Rent Apartment Prices in Germany - project explanation](/sample_page)
 <br>
 [Tableau Presentation](https://public.tableau.com/app/profile/carlos.keglevich/viz/RentProject/RentsinGermany)
 <br>
 [GitHub Python code for the Project](https://github.com/Keglev/Germany-Rental-prices)
+<br>
 <img src="images/Rents in Germany (1).png?raw=true"/>
 <br>
 
@@ -34,7 +39,8 @@ This project is to show the consumer behavior in a well-known online supermarket
 <br>
 <img src="images/ex4_10_bar_dep_price.png?raw=true"/>
 ---
-<br>
+<br><br>
+---
 ### SQL Project in Postgres and Tableau
 <br>
 The objective of this project is to answer top common business cases to stack holders:
@@ -56,10 +62,23 @@ Since there are a clear deadline to answer these questions, I faced many issues 
 <img src="images/Global Distribution of Customers.png?raw=true"/>
 
 ---
+### Tableau Presentation - Influenza Vacination in the USA
+<br>
+The objective os this project is to verify if there is a need of staff reinforcement in certain states of the USA
 
+- The project only uses a Excell file, extracted from CDC Data Bank in the USA
+- The project analyses the deaths by influenza, and also the hospital attendances due to Influenza.
 
-
-
+<img src="images/USA vs Influenza.png"/>
 ---
+<br>
+To answer the need of reinforecement of staff, it just analysed the Excel file with Tableau. Several conclusions were made and the report is available through the Tableau link bellow.
+<br>
+[Tableau Presentation of Influenza Project](https://public.tableau.com/app/profile/carlos.keglevich/viz/InfluenzaStoryboard_16623907140830/USAvsInfluenza)
+
+
+
+
+
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
