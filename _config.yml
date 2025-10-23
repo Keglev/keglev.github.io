@@ -1,0 +1,43 @@
+# Site Configuration
+title: "Project Documentation Hub — Carlos Keglevich"
+description: "Technical documentation, demos, and references for my public projects"
+author: "Carlos Keglevich"
+email: "carlos.keglevich@gmail.com"
+url: "https://keglev.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Theme (minimal built-in themes)
+theme: minima
+# Alternative: Use no theme and create custom layouts
+# theme: 
+
+# Collections (for future project pages)
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# SEO and social
+twitter:
+  username: # your twitter handle if you have one
+linkedin:
+  username: carlos-keglevich
+
+# GitHub Pages safe plugins only
+safe: true

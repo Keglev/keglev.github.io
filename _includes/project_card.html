@@ -1,0 +1,20 @@
+<!-- Project card include for reusability -->
+<div class="card">
+  <h3>{{ include.title }}</h3>
+  <p>{{ include.description }}</p>
+  <div class="kv">
+    {% if include.docs_url %}
+    <div>Docs</div><div><a href="{{ include.docs_url }}">{{ include.docs_url | remove: 'https://' | remove: 'http://' }}</a></div>
+    {% endif %}
+    {% if include.repo_url %}
+    <div>Repository</div><div><a href="{{ include.repo_url }}">{{ include.repo_url | remove: 'https://' | remove: 'http://' }}</a></div>
+    {% endif %}
+  </div>
+  {% if include.badges %}
+  <div class="badges">
+    {% for badge in include.badges %}
+    <span class="badge">{{ badge }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
