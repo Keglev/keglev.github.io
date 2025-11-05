@@ -54,7 +54,7 @@ For my portfolio and background, visit **[carloskeglevich.vercel.app](https://ca
       <div>Repository</div><div><a href="https://github.com/Keglev/stockease">github.com/Keglev/stockease</a></div>
     </div>
     <div class="badges">
-      <span class="badge">React + TS</span><span class="badge">Auth</span><span class="badge">CRUD</span>
+      <span class="badge">React + TS</span><span class="badge">Java 17</span><span class="badge">Spring Boot</span><span       class="badge">Auth</span><span class="badge">CRUD</span>
     </div>
   </div>
 
