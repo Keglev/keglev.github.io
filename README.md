@@ -1,6 +1,7 @@
 # keglev.github.io
 
 Personal project documentation hub built with Jekyll and hosted on GitHub Pages.
+I will change the appearance soon!
 
 ## Local Development
 
