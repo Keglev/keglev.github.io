@@ -1,19 +1,29 @@
-<!-- Project card include for reusability -->
+<!-- Project card include -->
 <div class="card">
   <h3>{{ include.title }}</h3>
+  {% if include.status %}
+  <div class="status">{{ include.status }}</div>
+  {% endif %}
   <p>{{ include.description }}</p>
   <div class="kv">
     {% if include.docs_url %}
-    <div>Docs</div><div><a href="{{ include.docs_url }}">{{ include.docs_url | remove: 'https://' | remove: 'http://' }}</a></div>
+    <span class="kv-label">Docs</span>
+    <span><a href="{{ include.docs_url }}" target="_blank">{{ include.docs_url | remove: 'https://' }}</a></span>
     {% endif %}
     {% if include.repo_url %}
-    <div>Repository</div><div><a href="{{ include.repo_url }}">{{ include.repo_url | remove: 'https://' | remove: 'http://' }}</a></div>
+    <span class="kv-label">Repository</span>
+    <span><a href="{{ include.repo_url }}" target="_blank">{{ include.repo_url | remove: 'https://' }}</a></span>
+    {% endif %}
+    {% if include.repo2_url %}
+    <span class="kv-label">Frontend</span>
+    <span><a href="{{ include.repo2_url }}" target="_blank">{{ include.repo2_url | remove: 'https://' }}</a></span>
     {% endif %}
   </div>
   {% if include.badges %}
   <div class="badges">
-    {% for badge in include.badges %}
-    <span class="badge">{{ badge }}</span>
+    {% assign badge_list = include.badges | split: ',' %}
+    {% for badge in badge_list %}
+    <span class="badge">{{ badge | strip }}</span>
     {% endfor %}
   </div>
   {% endif %}
