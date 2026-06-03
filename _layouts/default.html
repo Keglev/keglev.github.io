@@ -18,10 +18,11 @@
             --link:      #38bdf8;
             --accent:    #0ea5e9;
             --accent2:   #6366f1;
-            --featured:  #0d2137;
-            --featured-border: #0ea5e9;
             --badge-bg:  #1e3a52;
             --badge-fg:  #7dd3fc;
+            --portfolio-badge-bg: #1e1e3f;
+            --portfolio-badge-fg: #a5b4fc;
+            --portfolio-border:   #3730a3;
             --green:     #34d399;
             --radius:    12px;
         }
@@ -37,9 +38,8 @@
             line-height: 1.65;
         }
 
-        /* ── Layout ── */
         .wrapper {
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
             padding: 0 24px 60px;
         }
@@ -54,26 +54,25 @@
             z-index: 100;
         }
         .site-header nav {
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .nav-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
         }
         .site-header a {
             color: var(--fg);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            letter-spacing: 0.01em;
         }
         .site-header a:hover { color: var(--link); }
-        .nav-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            display: inline-block;
-        }
 
         /* ── Hero ── */
         .hero {
@@ -82,15 +81,14 @@
             margin-bottom: 40px;
         }
         .hero h1 {
-            font-size: 1.75rem;
+            font-size: 1.65rem;
             font-weight: 700;
             margin: 0 0 8px;
-            color: var(--fg);
         }
         .hero p {
             color: var(--muted);
             margin: 0 0 20px;
-            max-width: 600px;
+            max-width: 580px;
         }
         .hero-links {
             display: flex;
@@ -100,7 +98,6 @@
         .hero-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
             padding: 7px 14px;
             border-radius: 8px;
             border: 1px solid var(--line);
@@ -116,99 +113,28 @@
             background: var(--card-hover);
         }
 
-        /* ── Section title ── */
+        /* ── Section label ── */
         .section-label {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--muted);
-            margin: 40px 0 16px;
+            margin: 40px 0 14px;
         }
 
-        /* ── Featured card (portfolio) ── */
-        .featured-card {
-            background: var(--featured);
-            border: 1px solid var(--featured-border);
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        .featured-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-        }
-        .featured-label {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            background: rgba(14,165,233,0.1);
-            border: 1px solid rgba(14,165,233,0.3);
-            border-radius: 4px;
-            padding: 2px 8px;
-            margin-bottom: 12px;
-        }
-        .featured-card h2 {
-            margin: 0 0 8px;
-            font-size: 1.2rem;
-            color: var(--fg);
-        }
-        .featured-card p {
-            color: var(--muted);
-            margin: 0 0 16px;
-            max-width: 580px;
-        }
-        .featured-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .featured-link-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background: var(--accent);
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: opacity 0.15s;
-        }
-        .featured-link-primary:hover { opacity: 0.88; }
-        .featured-link-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--featured-border);
-            color: var(--link);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: background 0.15s;
-        }
-        .featured-link-secondary:hover { background: rgba(14,165,233,0.08); }
-
-        /* ── Project grid ── */
+        /* ── Grid: 2 columns max ── */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin-bottom: 16px;
         }
+        .grid-wide {
+            grid-column: 1 / -1;
+        }
 
-        /* ── Project card ── */
+        /* ── Card ── */
         .card {
             background: var(--card);
             border: 1px solid var(--line);
@@ -217,14 +143,21 @@
             transition: border-color 0.15s, background 0.15s, transform 0.15s;
             display: flex;
             flex-direction: column;
+            gap: 0;
         }
         .card:hover {
             border-color: var(--accent);
             background: var(--card-hover);
             transform: translateY(-2px);
         }
+        .card.portfolio-card {
+            border-color: var(--portfolio-border);
+        }
+        .card.portfolio-card:hover {
+            border-color: #6366f1;
+        }
         .card h3 {
-            margin: 0 0 6px;
+            margin: 0 0 4px;
             font-size: 1rem;
             color: var(--fg);
         }
@@ -235,17 +168,28 @@
             flex: 1;
         }
 
-        /* ── KV pairs inside card ── */
-        .kv {
-            display: grid;
-            grid-template-columns: 90px auto;
-            gap: 6px 12px;
-            margin-bottom: 12px;
-            font-size: 0.8rem;
+        /* ── Card type label ── */
+        .card-label {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            padding: 2px 7px;
+            margin-bottom: 10px;
+            width: fit-content;
         }
-        .kv-label { color: var(--muted); font-weight: 600; }
-        .kv a { color: var(--link); text-decoration: none; }
-        .kv a:hover { text-decoration: underline; }
+        .card-label.project {
+            background: rgba(14,165,233,0.1);
+            color: var(--accent);
+            border: 1px solid rgba(14,165,233,0.25);
+        }
+        .card-label.portfolio {
+            background: var(--portfolio-badge-bg);
+            color: var(--portfolio-badge-fg);
+            border: 1px solid var(--portfolio-border);
+        }
 
         /* ── Status pill ── */
         .status {
@@ -262,7 +206,30 @@
             width: 6px; height: 6px;
             border-radius: 50%;
             background: var(--green);
+            flex-shrink: 0;
         }
+
+        /* ── KV rows ── */
+        .kv {
+            display: grid;
+            grid-template-columns: 90px auto;
+            gap: 5px 10px;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+        .kv-label {
+            color: var(--muted);
+            font-weight: 600;
+            align-self: start;
+            padding-top: 1px;
+        }
+        .kv a {
+            color: var(--link);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .kv a:hover { text-decoration: underline; }
+        .kv-multi { display: flex; flex-direction: column; gap: 2px; }
 
         /* ── Badges ── */
         .badges {
@@ -270,6 +237,7 @@
             flex-wrap: wrap;
             gap: 6px;
             margin-top: auto;
+            padding-top: 4px;
         }
         .badge {
             font-size: 0.7rem;
@@ -279,8 +247,12 @@
             color: var(--badge-fg);
             font-weight: 500;
         }
+        .badge.portfolio-badge {
+            background: var(--portfolio-badge-bg);
+            color: var(--portfolio-badge-fg);
+        }
 
-        /* ── Standards section ── */
+        /* ── Standards ── */
         .standards {
             background: var(--surface);
             border: 1px solid var(--line);
@@ -291,8 +263,7 @@
         .standards h2 {
             font-size: 0.95rem;
             font-weight: 700;
-            margin: 0 0 12px;
-            color: var(--fg);
+            margin: 0 0 10px;
         }
         .standards ul {
             margin: 0;
@@ -320,10 +291,10 @@
 
         hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
 
-        /* ── Responsive ── */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.4rem; }
+        @media (max-width: 620px) {
             .grid { grid-template-columns: 1fr; }
+            .grid-wide { grid-column: auto; }
+            .hero h1 { font-size: 1.35rem; }
             .site-footer { flex-direction: column; }
         }
     </style>
@@ -337,10 +308,7 @@
     </header>
 
     <div class="wrapper">
-        <main>
-            {{ content }}
-        </main>
-
+        <main>{{ content }}</main>
         <footer class="site-footer">
             <span>© {{ site.author }}. Content and code available under their respective licenses.</span>
             <span>

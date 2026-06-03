@@ -14,52 +14,102 @@ description: Technical documentation, demos, and references for my public projec
   </div>
 </div>
 
-<div class="section-label">Featured</div>
-
-<div class="featured-card">
-  <div class="featured-label">Personal Portfolio</div>
-  <h2>carloskeglevich.vercel.app</h2>
-  <p>My professional portfolio — background, projects, skills, and contact. Includes JSDoc API documentation, test coverage reports, and deployment notes.</p>
-  <div class="featured-links">
-    <a class="featured-link-primary" href="https://carloskeglevich.vercel.app/" target="_blank">Visit Portfolio</a>
-    <a class="featured-link-secondary" href="https://keglev.github.io/my-portfolio/" target="_blank">Docs & Coverage</a>
-    <a class="featured-link-secondary" href="https://github.com/Keglev/my-portfolio" target="_blank">Repository</a>
-  </div>
-</div>
-
-<div class="section-label">Project Documentation</div>
+<div class="section-label">Projects</div>
 
 <div class="grid">
-  {% include project_card.html
-    title="SmartSupplyPro — Procurement & Supplier Management"
-    status="Production-ready · Deployed on Fly.io"
-    description="Enterprise-grade API for purchasing and supplier evaluation. 36 endpoints, WAC inventory valuation, price trend analysis, automatic shortage alerts. Replaces manual Excel workflows."
-    docs_url="https://keglev.github.io/inventory-service/"
-    repo_url="https://github.com/Keglev/inventory-service"
-    badges="Java 21, Spring Boot 3, Oracle Autonomous DB, React, TypeScript, Docker, OAuth2/JWT, CI/CD, JaCoCo >85%"
-  %}
 
-  {% include project_card.html
-    title="StockEase — Inventory Management"
-    status="Production-ready · Deployed on Fly.io"
-    description="Full-stack inventory system for small businesses. Capital value visualization and Excel BI export — without expensive ERP software. Split into backend API and React frontend repositories."
-    docs_url="https://keglev.github.io/stockease/"
-    repo_url="https://github.com/Keglev/stockease"
-    repo2_url="https://github.com/Keglev/frontend"
-    badges="Java 17, Spring Boot 3, PostgreSQL, React, TypeScript, OAuth2, CRUD"
-  %}
+  <div class="card portfolio-card">
+    <span class="card-label portfolio">Portfolio</span>
+    <h3>carloskeglevich.vercel.app</h3>
+    <p>My professional portfolio — background, projects, skills, and contact. Includes JSDoc API documentation and test coverage reports.</p>
+    <div class="kv">
+      <span class="kv-label">Live</span>
+      <span><a href="https://carloskeglevich.vercel.app/" target="_blank">carloskeglevich.vercel.app</a></span>
+      <span class="kv-label">Docs</span>
+      <span><a href="https://keglev.github.io/my-portfolio/" target="_blank">keglev.github.io/my-portfolio</a></span>
+      <span class="kv-label">Repository</span>
+      <span><a href="https://github.com/Keglev/my-portfolio" target="_blank">github.com/Keglev/my-portfolio</a></span>
+    </div>
+    <div class="badges">
+      <span class="badge portfolio-badge">React</span>
+      <span class="badge portfolio-badge">TypeScript</span>
+      <span class="badge portfolio-badge">Vite</span>
+      <span class="badge portfolio-badge">JSDoc</span>
+    </div>
+  </div>
 
-  {% include project_card.html
-    title="Restaurant Speisekarte — Static Menu App"
-    description="Lightweight React app for publishing a restaurant menu. Clean UI, zero-backend architecture, fast static deployment."
-    docs_url="https://keglev.github.io/restaurant-speisekarte/"
-    repo_url="https://github.com/Keglev/restaurant-speisekarte"
-    badges="React, JavaScript, Vite, Static Hosting"
-  %}
+  <div class="card grid-wide">
+    <span class="card-label project">Project</span>
+    <div class="status">Production-ready · Deployed on Fly.io</div>
+    <h3>SmartSupplyPro — Procurement &amp; Supplier Management</h3>
+    <p>Enterprise-grade API for purchasing and supplier evaluation. 36 endpoints, WAC inventory valuation, price trend analysis, automatic shortage alerts. Replaces manual Excel workflows. OAuth2/JWT security, CI/CD pipeline, test coverage &gt;85% (JaCoCo), fully documented with REDOC.</p>
+    <div class="kv">
+      <span class="kv-label">Docs</span>
+      <span><a href="https://keglev.github.io/inventory-service/" target="_blank">keglev.github.io/inventory-service</a></span>
+      <span class="kv-label">Repository</span>
+      <span><a href="https://github.com/Keglev/inventory-service" target="_blank">github.com/Keglev/inventory-service</a></span>
+    </div>
+    <div class="badges">
+      <span class="badge">Java 21</span>
+      <span class="badge">Spring Boot 3</span>
+      <span class="badge">Oracle Autonomous DB</span>
+      <span class="badge">React</span>
+      <span class="badge">TypeScript</span>
+      <span class="badge">Docker</span>
+      <span class="badge">OAuth2/JWT</span>
+      <span class="badge">CI/CD</span>
+      <span class="badge">JaCoCo &gt;85%</span>
+      <span class="badge">REDOC</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="card-label project">Project</span>
+    <div class="status">Production-ready · Deployed on Fly.io</div>
+    <h3>StockEase — Inventory Management</h3>
+    <p>Full-stack inventory system for small businesses. Capital value visualization and Excel BI export — without expensive ERP software.</p>
+    <div class="kv">
+      <span class="kv-label">Docs</span>
+      <span><a href="https://keglev.github.io/stockease/" target="_blank">keglev.github.io/stockease</a></span>
+      <span class="kv-label">Repositories</span>
+      <span class="kv-multi">
+        <a href="https://github.com/Keglev/stockease" target="_blank">github.com/Keglev/stockease</a>
+        <a href="https://github.com/Keglev/frontend" target="_blank">github.com/Keglev/frontend</a>
+      </span>
+    </div>
+    <div class="badges">
+      <span class="badge">Java 17</span>
+      <span class="badge">Spring Boot 3</span>
+      <span class="badge">PostgreSQL</span>
+      <span class="badge">React</span>
+      <span class="badge">TypeScript</span>
+      <span class="badge">OAuth2</span>
+      <span class="badge">CRUD</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="card-label project">Project</span>
+    <h3>Restaurant Speisekarte — Static Menu App</h3>
+    <p>Lightweight React app for publishing a restaurant menu. Clean UI, zero-backend architecture, fast static deployment.</p>
+    <div class="kv">
+      <span class="kv-label">Docs</span>
+      <span><a href="https://keglev.github.io/restaurant-speisekarte/" target="_blank">keglev.github.io/restaurant-speisekarte</a></span>
+      <span class="kv-label">Repository</span>
+      <span><a href="https://github.com/Keglev/restaurant-speisekarte" target="_blank">github.com/Keglev/restaurant-speisekarte</a></span>
+    </div>
+    <div class="badges">
+      <span class="badge">React</span>
+      <span class="badge">JavaScript</span>
+      <span class="badge">Vite</span>
+      <span class="badge">Static Hosting</span>
+    </div>
+  </div>
+
 </div>
 
 <div class="standards">
-  <h2>Standards & Conventions</h2>
+  <h2>Standards &amp; Conventions</h2>
   <ul>
     <li><strong>Documentation first.</strong> Each project includes a structured README, architecture notes, and API or usage guides.</li>
     <li><strong>Reproducible builds.</strong> CI/CD pipelines handle linting, testing, and publishing docs and demos automatically.</li>
