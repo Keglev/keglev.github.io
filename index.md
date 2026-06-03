@@ -6,86 +6,64 @@ description: Technical documentation, demos, and references for my public projec
 
 # Project Documentation Hub
 
-Welcome. This site centralizes technical **documentation, demos, and references** for my public projects.  
-For my portfolio and background, visit **[carloskeglevich.vercel.app](https://carloskeglevich.vercel.app/)**.
+Technical documentation, live demos, and references for my public projects.
+
+**Portfolio:** [carloskeglevich.vercel.app](https://carloskeglevich.vercel.app/) | **GitHub:** [github.com/Keglev](https://github.com/Keglev) | **LinkedIn:** [linkedin.com/in/carloskeglevich](https://www.linkedin.com/in/carloskeglevich)
 
 ---
 
-## Quick Access
+## Projects
 
-- ► **Portfolio:** <a class="cta" href="https://carloskeglevich.vercel.app/">carloskeglevich.vercel.app</a>  
-- ► **GitHub Profile:** <a href="https://github.com/Keglev">github.com/Keglev</a>
+### SmartSupplyPro — Procurement & Supplier Management
+
+Enterprise-grade full-stack application that digitalizes purchasing and supplier evaluation workflows. Features a 36-endpoint REST API with full audit trail, WAC inventory valuation, price trend analysis, and an automatic early-warning system for material shortages — replacing manual Excel processes and making tied-up capital visible in real time.
+
+| | |
+|---|---|
+| **Docs** | [keglev.github.io/inventory-service](https://keglev.github.io/inventory-service/) |
+| **Repository** | [github.com/Keglev/inventory-service](https://github.com/Keglev/inventory-service) |
+| **Stack** | Java 21 · Spring Boot 3 · Oracle Autonomous DB · React · TypeScript · Docker · CI/CD |
+| **Status** | Production-ready · OAuth2/JWT · Test coverage >85% (JaCoCo) · REDOC documented · Deployed on Fly.io |
 
 ---
 
-## Project Docs Index
+### StockEase — Inventory Management System
 
-<div class="grid">
+Full-stack inventory management system for small businesses. Provides complete stock transparency with capital value visualization and Excel BI export — without expensive ERP software. Split across two repositories: backend API and React frontend.
 
-  <div class="card">
-    <h3>SmartSupplyPro — Inventory & Supplier System</h3>
-    <p>Enterprise-style full-stack app (Spring Boot · React/TypeScript) featuring role-based access, analytics, CI/CD, and comprehensive docs.</p>
-    <div class="kv">
-      <div>Docs</div><div><a href="https://keglev.github.io/inventory-service/">keglev.github.io/inventory-service</a></div>
-      <div>Repository</div><div><a href="https://github.com/Keglev/inventory-service">github.com/Keglev/inventory-service</a></div>
-    </div>
-    <div class="badges">
-      <span class="badge">Java 17</span><span class="badge">Spring Boot</span><span class="badge">React + TS</span><span class="badge">CI/CD</span>
-    </div>
-  </div>
+| | |
+|---|---|
+| **Docs** | [keglev.github.io/stockease](https://keglev.github.io/stockease/) |
+| **Backend Repository** | [github.com/Keglev/stockease](https://github.com/Keglev/stockease) |
+| **Frontend Repository** | [github.com/Keglev/frontend](https://github.com/Keglev/frontend) |
+| **Stack** | Java 17 · Spring Boot 3 · PostgreSQL · React · TypeScript · OAuth2 · CRUD |
+| **Status** | Production-ready · Auth secured · Deployed on Fly.io |
 
-  <div class="card">
-    <h3>Restaurant Speisekarte — Static Menu (React)</h3>
-    <p>Lightweight React app for publishing a restaurant menu with a clean UI and zero-backend deployment.</p>
-    <div class="kv">
-      <div>Docs</div><div><a href="https://keglev.github.io/restaurant-speisekarte/">keglev.github.io/restaurant-speisekarte</a></div>
-      <div>Repository</div><div><a href="https://github.com/Keglev/restaurant-speisekarte">github.com/Keglev/restaurant-speisekarte</a></div>
-    </div>
-    <div class="badges">
-      <span class="badge">React</span><span class="badge">Vite</span><span class="badge">Static Hosting</span>
-    </div>
-  </div>
+---
 
-  <div class="card">
-    <h3>StockEase — Product Management</h3>
-    <p>The Backend for managing product data; Uses Spring Boot and integrated PostGreSQL and integrates with a frontend for auth and CRUD workflows.</p>
-    <div class="kv">
-      <div>Docs</div><div><a href="https://keglev.github.io/stockease/">keglev.github.io/stockease</a></div>
-      <div>Repository</div><div><a href="https://github.com/Keglev/stockease">github.com/Keglev/stockease</a></div>
-    </div>
-    <div class="badges">
-      <span class="badge">React + TS</span><span class="badge">Auth</span><span class="badge">CRUD</span>
-    </div>
-  </div>
+### Restaurant Speisekarte — Static Menu App
 
-  <div class="card">
-    <h3>Frontend — Product Management</h3>
-    <p>The frontend for StockEase project for managing product data; Uses React + Typescript for efficient stock and inventory management.</p>
-    <div class="kv">
-      <div>Docs</div><div><a href="https://keglev.github.io/frontend/">keglev.github.io/stockease</a></div>
-      <div>Repository</div><div><a href="https://github.com/Keglev/frontend">github.com/Keglev/stockease</a></div>
-    </div>
-    <div class="badges">
-      <span class="badge">React + TS</span><span class="badge">Auth</span><span class="badge">CRUD</span>
-    </div>
-  </div>
+Lightweight React application for publishing a restaurant menu. Clean UI, zero-backend architecture, fast static deployment.
 
-</div>
-
-> **Tip:** Add more projects by creating a folder at the repo root and pushing the built site to that path.  
-> Example: `/my-project/` → `https://keglev.github.io/my-project/`
+| | |
+|---|---|
+| **Docs** | [keglev.github.io/restaurant-speisekarte](https://keglev.github.io/restaurant-speisekarte/) |
+| **Repository** | [github.com/Keglev/restaurant-speisekarte](https://github.com/Keglev/restaurant-speisekarte) |
+| **Stack** | React · JavaScript · Vite · Static Hosting |
 
 ---
 
 ## Standards & Conventions
 
-- **Documentation first.** Each project includes clear structure (README, architecture notes, API/usage guides).
-- **Reproducible builds.** CI pipelines to lint, test, and publish docs/demos where applicable.
-- **Clarity over noise.** Minimal styling, consistent navigation, and practical examples.
+- **Documentation first.** Each project includes a structured README, architecture notes, and API or usage guides.
+- **Reproducible builds.** CI/CD pipelines handle linting, testing, and publishing docs and demos.
+- **Clarity over noise.** Minimal styling, consistent navigation, and practical examples throughout.
 
 ---
 
 ## Contact
 
-- Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a>  
-- LinkedIn: <a href="https://www.linkedin.com/in/{{ site.linkedin.username }}">linkedin.com/in/{{ site.linkedin.username }}</a>
+- Email: [carlos.keglevich@gmail.com](mailto:carlos.keglevich@gmail.com)
+- LinkedIn: [linkedin.com/in/carloskeglevich](https://www.linkedin.com/in/carloskeglevich)
+
+© Carlos Keglevich. Content and code available under their respective licenses.
