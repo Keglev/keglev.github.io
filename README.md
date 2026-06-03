@@ -13,7 +13,7 @@ I will change the appearance soon!
    ```
 4. Serve locally:
    ```bash
-   bundle exec jekyll serve
+   bundle exec jekyll serv
    ```
 5. Open http://localhost:4000
 
