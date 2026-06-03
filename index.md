@@ -14,31 +14,11 @@ description: Technical documentation, demos, and references for my public projec
   </div>
 </div>
 
-<div class="section-label">Projects</div>
+<div class="section-label">Project Documentation</div>
 
 <div class="grid">
 
-  <div class="card portfolio-card">
-    <span class="card-label portfolio">Portfolio</span>
-    <h3>carloskeglevich.vercel.app</h3>
-    <p>My professional portfolio — background, projects, skills, and contact. Includes JSDoc API documentation and test coverage reports.</p>
-    <div class="kv">
-      <span class="kv-label">Live</span>
-      <span><a href="https://carloskeglevich.vercel.app/" target="_blank">carloskeglevich.vercel.app</a></span>
-      <span class="kv-label">Docs</span>
-      <span><a href="https://keglev.github.io/my-portfolio/" target="_blank">keglev.github.io/my-portfolio</a></span>
-      <span class="kv-label">Repository</span>
-      <span><a href="https://github.com/Keglev/my-portfolio" target="_blank">github.com/Keglev/my-portfolio</a></span>
-    </div>
-    <div class="badges">
-      <span class="badge portfolio-badge">React</span>
-      <span class="badge portfolio-badge">TypeScript</span>
-      <span class="badge portfolio-badge">Vite</span>
-      <span class="badge portfolio-badge">JSDoc</span>
-    </div>
-  </div>
-
-  <div class="card grid-wide">
+  <div class="card">
     <span class="card-label project">Project</span>
     <div class="status">Production-ready · Deployed on Fly.io</div>
     <h3>SmartSupplyPro — Procurement &amp; Supplier Management</h3>
@@ -67,7 +47,7 @@ description: Technical documentation, demos, and references for my public projec
     <span class="card-label project">Project</span>
     <div class="status">Production-ready · Deployed on Fly.io</div>
     <h3>StockEase — Inventory Management</h3>
-    <p>Full-stack inventory system for small businesses. Capital value visualization and Excel BI export — without expensive ERP software.</p>
+    <p>Full-stack inventory system for small businesses. Capital value visualization and Excel BI export — without expensive ERP software. Split into backend API and React frontend repositories.</p>
     <div class="kv">
       <span class="kv-label">Docs</span>
       <span><a href="https://keglev.github.io/stockease/" target="_blank">keglev.github.io/stockease</a></span>
@@ -115,4 +95,17 @@ description: Technical documentation, demos, and references for my public projec
     <li><strong>Reproducible builds.</strong> CI/CD pipelines handle linting, testing, and publishing docs and demos automatically.</li>
     <li><strong>Clarity over noise.</strong> Minimal styling, consistent navigation, and practical examples throughout.</li>
   </ul>
+</div>
+
+<div class="about-strip">
+  <div class="about-left">
+    <span class="card-label portfolio">Portfolio</span>
+    <span class="about-name">Carlos Keglevich</span>
+    <span class="about-desc">Java Full Stack Developer · Fürth, Germany</span>
+  </div>
+  <div class="about-links">
+    <a href="https://carloskeglevich.vercel.app/" target="_blank">carloskeglevich.vercel.app</a>
+    <a href="https://keglev.github.io/my-portfolio/" target="_blank">Docs &amp; Coverage</a>
+    <a href="https://github.com/Keglev/my-portfolio" target="_blank">Repository</a>
+  </div>
 </div>

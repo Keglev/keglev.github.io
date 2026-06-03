@@ -123,15 +123,12 @@
             margin: 40px 0 14px;
         }
 
-        /* ── Grid: 2 columns max ── */
+        /* ── Grid: uniform 2 columns ── */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin-bottom: 16px;
-        }
-        .grid-wide {
-            grid-column: 1 / -1;
         }
 
         /* ── Card ── */
@@ -149,12 +146,6 @@
             border-color: var(--accent);
             background: var(--card-hover);
             transform: translateY(-2px);
-        }
-        .card.portfolio-card {
-            border-color: var(--portfolio-border);
-        }
-        .card.portfolio-card:hover {
-            border-color: #6366f1;
         }
         .card h3 {
             margin: 0 0 4px;
@@ -274,6 +265,46 @@
         .standards li { margin-bottom: 6px; }
         .standards strong { color: var(--fg); }
 
+        /* ── About strip ── */
+        .about-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--portfolio-border);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin-top: 24px;
+        }
+        .about-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .about-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--fg);
+        }
+        .about-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .about-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .about-links a {
+            font-size: 0.8rem;
+            color: var(--link);
+            text-decoration: none;
+        }
+        .about-links a:hover { text-decoration: underline; }
+
         /* ── Footer ── */
         .site-footer {
             border-top: 1px solid var(--line);
@@ -293,8 +324,8 @@
 
         @media (max-width: 620px) {
             .grid { grid-template-columns: 1fr; }
-            .grid-wide { grid-column: auto; }
             .hero h1 { font-size: 1.35rem; }
+            .about-strip { flex-direction: column; align-items: flex-start; }
             .site-footer { flex-direction: column; }
         }
     </style>
