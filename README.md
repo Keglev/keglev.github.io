@@ -1,7 +1,21 @@
 # keglev.github.io
 
-Personal project documentation hub built with Jekyll and hosted on GitHub Pages.
-I will change the appearance soon!
+Project documentation hub for Carlos Keglevich's public projects. Built with Jekyll and hosted on GitHub Pages.
+
+Live at: https://keglev.github.io/
+
+## Structure
+
+```
+├── _config.yml           # Jekyll configuration
+├── _layouts/
+│   └── default.html      # Main layout (CSS included inline)
+├── _includes/
+│   └── project_card.html # Reusable project card component
+├── index.md              # Homepage content
+├── Gemfile               # Ruby dependencies
+└── README.md             # This file
+```
 
 ## Local Development
 
@@ -13,46 +27,35 @@ I will change the appearance soon!
    ```
 4. Serve locally:
    ```bash
-   bundle exec jekyll serv
+   bundle exec jekyll serve
    ```
 5. Open http://localhost:4000
 
-## Project Structure
+## Adding a New Project
 
-```
-├── _config.yml           # Jekyll configuration
-├── _layouts/
-│   └── default.html      # Main layout template
-├── _includes/
-│   └── project_card.html # Reusable project card component
-├── index.md              # Homepage content
-├── Gemfile               # Ruby dependencies
-└── README.md            # This file
-```
+Edit `index.md` and add a card inside the `.grid` div:
 
-## Adding New Projects
-
-Edit `index.md` and add a new project card in the grid section, or use the include:
-
-```markdown
-{% include project_card.html 
-   title="Your Project Name"
-   description="Project description here"
-   docs_url="https://keglev.github.io/your-project/"
-   repo_url="https://github.com/Keglev/your-project"
-   badges="React,TypeScript,API" %}
+```html
+<div class="card">
+  <span class="card-label project">Project</span>
+  <div class="status">Production-ready · Deployed on Fly.io</div>
+  <h3>Project Name</h3>
+  <p>Short description.</p>
+  <div class="kv">
+    <span class="kv-label">Docs</span>
+    <span><a href="https://keglev.github.io/your-project/" target="_blank">keglev.github.io/your-project</a></span>
+    <span class="kv-label">Repository</span>
+    <span><a href="https://github.com/Keglev/your-project" target="_blank">github.com/Keglev/your-project</a></span>
+  </div>
+  <div class="badges">
+    <span class="badge">Java 21</span>
+    <span class="badge">Spring Boot 3</span>
+  </div>
+</div>
 ```
 
-## Features
-
-- ✅ Minimal, professional design
-- ✅ Dark/light mode support
-- ✅ Responsive grid layout
-- ✅ SEO optimization with jekyll-seo-tag
-- ✅ GitHub Pages compatible
-- ✅ Fast loading with minimal CSS
-- ✅ Accessible and clean markup
+Use `class="card grid-wide"` to make the card span both columns.
 
 ## Deployment
 
-This site automatically deploys to GitHub Pages when pushed to the main branch.
+Pushes to `main` deploy automatically via GitHub Pages.
