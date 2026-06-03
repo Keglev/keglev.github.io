@@ -1,0 +1,438 @@
+/*
+  assets/css/main.css
+  ===================
+  Main stylesheet for the Project Documentation Hub.
+  Loaded by _layouts/default.html via a <link> tag.
+
+  DO NOT add @import or external font URLs — GitHub Pages serves
+  this as a plain static file and the goal is zero external dependencies.
+
+  To retheme the site, update the CSS custom properties in :root.
+  All colors, spacing tokens, and the border radius are defined there.
+
+  Sections (in order):
+    1. Design Tokens      (:root variables)
+    2. Reset & Base       (html, body, box-sizing)
+    3. Layout Wrapper     (.wrapper)
+    4. Site Header        (.site-header, .nav-dot)
+    5. Hero Section       (.hero, .hero-links, .hero-link)
+    6. Section Label      (.section-label)
+    7. Project Grid       (.grid)
+    8. Project Card       (.card, .card h3, .card p)
+    9. Card Type Label    (.card-label, .project, .portfolio)
+   10. Status Pill        (.status)
+   11. Key-Value Rows     (.kv, .kv-label, .kv-multi)
+   12. Technology Badges  (.badges, .badge)
+   13. Standards Block    (.standards)
+   14. About Strip        (.about-strip, .about-left, .about-links)
+   15. Site Footer        (.site-footer)
+   16. Responsive         (@media max-width: 620px)
+*/
+
+        /* ============================================================
+           DESIGN TOKENS
+           All colors and shared values are defined here as CSS custom
+           properties. Update this section to retheme the entire site.
+           ============================================================ */
+        :root {
+            --bg:                 #0b1120; /* Page background              */
+            --surface:            #111827; /* Header / raised surface      */
+            --card:               #1a2333; /* Card background               */
+            --card-hover:         #1f2d42; /* Card background on hover      */
+            --line:               #1f2d3d; /* Borders and dividers          */
+            --fg:                 #e2e8f0; /* Primary text                  */
+            --muted:              #7d93b2; /* Secondary / subdued text      */
+            --link:               #38bdf8; /* Links and interactive color   */
+            --accent:             #0ea5e9; /* Primary accent (cyan)         */
+            --accent2:            #6366f1; /* Secondary accent (indigo)     */
+            --badge-bg:           #1e3a52; /* Tech badge background         */
+            --badge-fg:           #7dd3fc; /* Tech badge text               */
+            --portfolio-badge-bg: #1e1e3f; /* Portfolio badge background    */
+            --portfolio-badge-fg: #a5b4fc; /* Portfolio badge text          */
+            --portfolio-border:   #3730a3; /* Portfolio card border         */
+            --green:              #34d399; /* Status indicator (live/ready) */
+            --radius:             12px;    /* Standard border radius        */
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        /* ============================================================
+           LAYOUT WRAPPER
+           Centers content with a maximum width. The header uses its
+           own max-width internally to stay aligned with the wrapper.
+           ============================================================ */
+        .wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ============================================================
+           SITE HEADER
+           Sticky top bar with accent dot and site title link.
+           z-index: 100 ensures it stays above card hover transforms.
+           ============================================================ */
+        .site-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+            padding: 14px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .site-header nav {
+            max-width: 860px; /* Matches .wrapper for visual alignment */
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Small accent dot to the left of the site title */
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+        .site-header a {
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .site-header a:hover { color: var(--link); }
+
+        /* ============================================================
+           HERO SECTION
+           Full-width intro block at the top of the index page.
+           Contains the page title, subtitle, and quick-access links.
+           ============================================================ */
+        .hero {
+            padding: 48px 0 32px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+        .hero p {
+            color: var(--muted);
+            margin: 0 0 20px;
+            max-width: 580px;
+        }
+        /* Row of pill-style navigation links (Portfolio, GitHub, LinkedIn) */
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--link);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .hero-link:hover {
+            border-color: var(--accent);
+            background: var(--card-hover);
+        }
+
+        /* ============================================================
+           SECTION LABEL
+           Small uppercase label used as a visual divider between
+           content sections (e.g. "PROJECT DOCUMENTATION").
+           ============================================================ */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 40px 0 14px;
+        }
+
+        /* ============================================================
+           PROJECT GRID
+           Uniform two-column grid for project cards. Collapses to a
+           single column on narrow viewports (see responsive section).
+           ============================================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* ============================================================
+           PROJECT CARD
+           Each card displays a project's type label, status, title,
+           description, key-value links, and technology badges.
+           Cards use flex-direction: column so the badge row always
+           sits at the bottom regardless of content height.
+           ============================================================ */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: border-color 0.15s, background 0.15s, transform 0.15s;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Subtle lift effect on hover to indicate interactivity */
+        .card:hover {
+            border-color: var(--accent);
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            margin: 0 0 4px;
+            font-size: 1rem;
+            color: var(--fg);
+        }
+        /* Description stretches to fill available space via flex: 1,
+           keeping badges consistently at the bottom of each card */
+        .card p {
+            color: var(--muted);
+            font-size: 0.875rem;
+            margin: 0 0 14px;
+            flex: 1;
+        }
+
+        /* ============================================================
+           CARD TYPE LABEL
+           Small pill in the top-left of each card indicating its type.
+           Variants: .project (cyan) and .portfolio (indigo).
+           ============================================================ */
+        .card-label {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            padding: 2px 7px;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+        .card-label.project {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+        }
+        .card-label.portfolio {
+            background: var(--portfolio-badge-bg);
+            color: var(--portfolio-badge-fg);
+            border: 1px solid var(--portfolio-border);
+        }
+
+        /* ============================================================
+           STATUS PILL
+           Inline deployment/build status indicator with a green dot.
+           Used for production-ready projects deployed on Fly.io.
+           ============================================================ */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        /* Green dot rendered via ::before pseudo-element */
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           KEY-VALUE ROWS
+           Two-column grid inside a card for structured metadata:
+           labels on the left (90px fixed), values on the right.
+           .kv-multi stacks multiple links vertically in one value cell.
+           ============================================================ */
+        .kv {
+            display: grid;
+            grid-template-columns: 90px auto;
+            gap: 5px 10px;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+        .kv-label {
+            color: var(--muted);
+            font-weight: 600;
+            align-self: start;
+            padding-top: 1px;
+        }
+        .kv a {
+            color: var(--link);
+            text-decoration: none;
+            word-break: break-all; /* Prevents long URLs from overflowing */
+        }
+        .kv a:hover { text-decoration: underline; }
+        /* Used when a single label maps to multiple URLs (e.g. split repos) */
+        .kv-multi {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* ============================================================
+           TECHNOLOGY BADGES
+           Pill-shaped tags listing the tech stack for each project.
+           Positioned at the bottom of the card via margin-top: auto.
+           ============================================================ */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 4px;
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: var(--badge-bg);
+            color: var(--badge-fg);
+            font-weight: 500;
+        }
+        /* Indigo variant used for portfolio-related badge entries */
+        .badge.portfolio-badge {
+            background: var(--portfolio-badge-bg);
+            color: var(--portfolio-badge-fg);
+        }
+
+        /* ============================================================
+           STANDARDS & CONVENTIONS BLOCK
+           Full-width dark surface block listing development standards.
+           Placed below the project grid before the about strip.
+           ============================================================ */
+        .standards {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 40px;
+        }
+        .standards h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+        }
+        .standards ul {
+            margin: 0;
+            padding: 0 0 0 18px;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+        .standards li { margin-bottom: 6px; }
+        .standards strong { color: var(--fg); }
+
+        /* ============================================================
+           ABOUT STRIP
+           Slim full-width row at the bottom of the page linking to the
+           personal portfolio. Uses indigo border to visually distinguish
+           it from project cards without overpowering them.
+           ============================================================ */
+        .about-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--portfolio-border);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin-top: 24px;
+        }
+        /* Left side: label pill + name + role */
+        .about-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .about-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--fg);
+        }
+        .about-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        /* Right side: quick links to portfolio, docs, and repository */
+        .about-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .about-links a {
+            font-size: 0.8rem;
+            color: var(--link);
+            text-decoration: none;
+        }
+        .about-links a:hover { text-decoration: underline; }
+
+        /* ============================================================
+           SITE FOOTER
+           Two-column row with copyright on the left and contact links
+           on the right. Populated via _config.yml (site.author, site.email).
+           ============================================================ */
+        .site-footer {
+            border-top: 1px solid var(--line);
+            margin-top: 48px;
+            padding-top: 20px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .site-footer a { color: var(--muted); text-decoration: none; }
+        .site-footer a:hover { color: var(--link); }
+
+        hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+
+        /* ============================================================
+           RESPONSIVE
+           Below 620px: collapse grid to single column, reduce hero
+           font size, and stack footer and about-strip vertically.
+           ============================================================ */
+        @media (max-width: 620px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.35rem; }
+            .about-strip { flex-direction: column; align-items: flex-start; }
+            .site-footer { flex-direction: column; }
+        }

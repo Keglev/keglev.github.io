@@ -1,336 +1,74 @@
+<!--
+  _layouts/default.html
+  =====================
+  Main layout template for the Project Documentation Hub.
+  Applied to all pages via front matter: layout: default
+
+  TEMPLATE ENGINE: Jekyll + Liquid
+  HOSTING:         GitHub Pages (static, no server-side processing)
+
+  STRUCTURE:
+    <head>
+      - Meta tags, SEO (jekyll-seo-tag plugin)
+      - Link to /assets/css/main.css (all styles and design tokens)
+    <body>
+      - .site-header   Sticky top navigation bar
+      - .wrapper       Centered content container (max 860px)
+        - <main>       Page content injected via {{ content }}
+        - .site-footer Copyright and contact links
+
+  STYLES:
+    All CSS lives in /assets/css/main.css.
+    Update that file to change colors, layout, or component styles.
+
+  ADDING A NEW PAGE:
+    1. Create a new .md or .html file in the repository root.
+    2. Add front matter:
+         ---
+         layout: default
+         title: "Page Title"
+         ---
+    3. Write content below the front matter.
+    4. Push to main — GitHub Pages deploys automatically.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+      Title: uses page-level title if defined in front matter,
+      falls back to site.title from _config.yml.
+    -->
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+    <!--
+      Description: used by search engines and social preview cards.
+      Page-level description takes priority over the site-level default.
+    -->
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+    <!--
+      jekyll-seo-tag: generates Open Graph, Twitter Card, and canonical
+      link tags automatically from _config.yml and page front matter.
+      Requires jekyll-seo-tag listed in _config.yml plugins and Gemfile.
+    -->
     {% seo %}
-    <style>
-        :root {
-            --bg:        #0b1120;
-            --surface:   #111827;
-            --card:      #1a2333;
-            --card-hover:#1f2d42;
-            --line:      #1f2d3d;
-            --fg:        #e2e8f0;
-            --muted:     #7d93b2;
-            --link:      #38bdf8;
-            --accent:    #0ea5e9;
-            --accent2:   #6366f1;
-            --badge-bg:  #1e3a52;
-            --badge-fg:  #7dd3fc;
-            --portfolio-badge-bg: #1e1e3f;
-            --portfolio-badge-fg: #a5b4fc;
-            --portfolio-border:   #3730a3;
-            --green:     #34d399;
-            --radius:    12px;
-        }
 
-        *, *::before, *::after { box-sizing: border-box; }
-
-        html, body {
-            margin: 0; padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: 15px;
-            line-height: 1.65;
-        }
-
-        .wrapper {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 0 24px 60px;
-        }
-
-        /* ── Header ── */
-        .site-header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--line);
-            padding: 14px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .site-header nav {
-            max-width: 860px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .nav-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            flex-shrink: 0;
-        }
-        .site-header a {
-            color: var(--fg);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .site-header a:hover { color: var(--link); }
-
-        /* ── Hero ── */
-        .hero {
-            padding: 48px 0 32px;
-            border-bottom: 1px solid var(--line);
-            margin-bottom: 40px;
-        }
-        .hero h1 {
-            font-size: 1.65rem;
-            font-weight: 700;
-            margin: 0 0 8px;
-        }
-        .hero p {
-            color: var(--muted);
-            margin: 0 0 20px;
-            max-width: 580px;
-        }
-        .hero-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .hero-link {
-            display: inline-flex;
-            align-items: center;
-            padding: 7px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--line);
-            background: var(--card);
-            color: var(--link);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: border-color 0.15s, background 0.15s;
-        }
-        .hero-link:hover {
-            border-color: var(--accent);
-            background: var(--card-hover);
-        }
-
-        /* ── Section label ── */
-        .section-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin: 40px 0 14px;
-        }
-
-        /* ── Grid: uniform 2 columns ── */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        /* ── Card ── */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 20px;
-            transition: border-color 0.15s, background 0.15s, transform 0.15s;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-        .card:hover {
-            border-color: var(--accent);
-            background: var(--card-hover);
-            transform: translateY(-2px);
-        }
-        .card h3 {
-            margin: 0 0 4px;
-            font-size: 1rem;
-            color: var(--fg);
-        }
-        .card p {
-            color: var(--muted);
-            font-size: 0.875rem;
-            margin: 0 0 14px;
-            flex: 1;
-        }
-
-        /* ── Card type label ── */
-        .card-label {
-            display: inline-block;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border-radius: 4px;
-            padding: 2px 7px;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-        .card-label.project {
-            background: rgba(14,165,233,0.1);
-            color: var(--accent);
-            border: 1px solid rgba(14,165,233,0.25);
-        }
-        .card-label.portfolio {
-            background: var(--portfolio-badge-bg);
-            color: var(--portfolio-badge-fg);
-            border: 1px solid var(--portfolio-border);
-        }
-
-        /* ── Status pill ── */
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.72rem;
-            color: var(--green);
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .status::before {
-            content: '';
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            flex-shrink: 0;
-        }
-
-        /* ── KV rows ── */
-        .kv {
-            display: grid;
-            grid-template-columns: 90px auto;
-            gap: 5px 10px;
-            margin-bottom: 12px;
-            font-size: 0.8rem;
-        }
-        .kv-label {
-            color: var(--muted);
-            font-weight: 600;
-            align-self: start;
-            padding-top: 1px;
-        }
-        .kv a {
-            color: var(--link);
-            text-decoration: none;
-            word-break: break-all;
-        }
-        .kv a:hover { text-decoration: underline; }
-        .kv-multi { display: flex; flex-direction: column; gap: 2px; }
-
-        /* ── Badges ── */
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: auto;
-            padding-top: 4px;
-        }
-        .badge {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: var(--badge-bg);
-            color: var(--badge-fg);
-            font-weight: 500;
-        }
-        .badge.portfolio-badge {
-            background: var(--portfolio-badge-bg);
-            color: var(--portfolio-badge-fg);
-        }
-
-        /* ── Standards ── */
-        .standards {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-top: 40px;
-        }
-        .standards h2 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin: 0 0 10px;
-        }
-        .standards ul {
-            margin: 0;
-            padding: 0 0 0 18px;
-            color: var(--muted);
-            font-size: 0.875rem;
-        }
-        .standards li { margin-bottom: 6px; }
-        .standards strong { color: var(--fg); }
-
-        /* ── About strip ── */
-        .about-strip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-            background: var(--surface);
-            border: 1px solid var(--portfolio-border);
-            border-radius: var(--radius);
-            padding: 16px 20px;
-            margin-top: 24px;
-        }
-        .about-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .about-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--fg);
-        }
-        .about-desc {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-        .about-links {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .about-links a {
-            font-size: 0.8rem;
-            color: var(--link);
-            text-decoration: none;
-        }
-        .about-links a:hover { text-decoration: underline; }
-
-        /* ── Footer ── */
-        .site-footer {
-            border-top: 1px solid var(--line);
-            margin-top: 48px;
-            padding-top: 20px;
-            color: var(--muted);
-            font-size: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .site-footer a { color: var(--muted); text-decoration: none; }
-        .site-footer a:hover { color: var(--link); }
-
-        hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
-
-        @media (max-width: 620px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 1.35rem; }
-            .about-strip { flex-direction: column; align-items: flex-start; }
-            .site-footer { flex-direction: column; }
-        }
-    </style>
+    <!--
+      Stylesheet: served as a static file by GitHub Pages.
+      relative_url ensures the path is correct regardless of baseurl.
+    -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 <body>
+
+    <!--
+      SITE HEADER
+      Sticky navigation bar. The .nav-dot provides a subtle brand accent.
+      site.title is pulled from _config.yml.
+    -->
     <header class="site-header">
         <nav>
             <span class="nav-dot"></span>
@@ -338,8 +76,19 @@
         </nav>
     </header>
 
+    <!--
+      MAIN WRAPPER
+      Centers content within the max-width constraint.
+      {{ content }} is replaced by Jekyll with the rendered page content.
+    -->
     <div class="wrapper">
         <main>{{ content }}</main>
+
+        <!--
+          SITE FOOTER
+          site.author and site.email are defined in _config.yml.
+          LinkedIn URL is hardcoded as it does not vary with config.
+        -->
         <footer class="site-footer">
             <span>© {{ site.author }}. Content and code available under their respective licenses.</span>
             <span>
@@ -348,5 +97,6 @@
             </span>
         </footer>
     </div>
+
 </body>
 </html>
