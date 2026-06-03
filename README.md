@@ -7,14 +7,17 @@ Live at: https://keglev.github.io/
 ## Structure
 
 ```
-├── _config.yml           # Jekyll configuration
+├── _config.yml              # Jekyll configuration
 ├── _layouts/
-│   └── default.html      # Main layout (CSS included inline)
+│   └── default.html         # Main layout template (HTML structure only)
 ├── _includes/
-│   └── project_card.html # Reusable project card component
-├── index.md              # Homepage content
-├── Gemfile               # Ruby dependencies
-└── README.md             # This file
+│   └── project_card.html    # Reusable project card component
+├── assets/
+│   └── css/
+│       └── main.css         # All styles and design tokens
+├── index.md                 # Homepage content
+├── Gemfile                  # Ruby dependencies
+└── README.md                # This file
 ```
 
 ## Local Development
@@ -54,7 +57,7 @@ Edit `index.md` and add a card inside the `.grid` div:
 </div>
 ```
 
-Use `class="card grid-wide"` to make the card span both columns.
+To modify colors or layout, edit `assets/css/main.css`. Design tokens (colors, radius, spacing) are all in the `:root` block at the top of that file.
 
 ## Deployment
 
