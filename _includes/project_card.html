@@ -1,10 +1,22 @@
-<!--
+{% comment %}
   _includes/project_card.html
   ===========================
   Reusable project card component for the documentation hub index page.
 
+  CRITICAL — WHY THIS HEADER IS A LIQUID COMMENT AND NOT AN HTML COMMENT
+    Liquid runs before the browser ever sees the file, and it does not know
+    what an HTML comment is. A literal {% raw %}{% include project_card.html %}{% endraw %}
+    written inside <!-- ... --> is therefore still executed: the include
+    pulls in its own file, which executes the example again, forever. The
+    build does not error — it recurses until the process runs out of memory
+    and the `jekyll build` command simply hangs.
+
+    Any documentation header in _includes/ or _layouts/ that contains
+    {% raw %}{%{% endraw %} or {% raw %}{{{% endraw %} must use {% raw %}{% comment %}{% endraw %} ... {% raw %}{% endcomment %}{% endraw %},
+    and any tag shown as an example must be wrapped in {% raw %}{% raw %}{% endraw %}.
+
   USAGE (in index.md):
-    {% include project_card.html
+    {% raw %}{% include project_card.html
        title="Project Name"
        description="Short description."
        status="Production-ready · Deployed on Fly.io"
@@ -12,7 +24,7 @@
        repo_url="https://github.com/Keglev/project"
        repo2_url="https://github.com/Keglev/project-frontend"
        badges="Java 21, Spring Boot 3, React"
-    %}
+    %}{% endraw %}
 
   PARAMETERS:
     title        (required) Display name of the project.
@@ -37,7 +49,7 @@
     - Badge list uses Liquid's split filter on the comma-separated string.
     - This include does not output a wrapping .grid element; the caller
       is responsible for placing this inside a <div class="grid"> block.
--->
+{% endcomment %}
 
 <div class="card">
 

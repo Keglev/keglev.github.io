@@ -1,4 +1,4 @@
-<!--
+{% comment %}
   _layouts/default.html
   =====================
   Main layout template for the Project Documentation Hub.
@@ -14,7 +14,7 @@
     <body>
       - .site-header   Sticky top navigation bar
       - .wrapper       Centered content container (max 860px)
-        - <main>       Page content injected via {{ content }}
+        - <main>       Page content injected by the layout
         - .site-footer Copyright and contact links
 
   STYLES:
@@ -30,7 +30,7 @@
          ---
     3. Write content below the front matter.
     4. Push to main — GitHub Pages deploys automatically.
--->
+{% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
