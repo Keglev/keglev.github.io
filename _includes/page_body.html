@@ -28,14 +28,26 @@
 
 <div class="grid">
 
+  {%- comment -%}
+    ORDER IS DELIBERATE. The first card is the one a recruiter reads before
+    deciding whether to keep scrolling, so the strongest project leads:
+    Maintenance Assistant carries the RAG work, the ADRs and the live demo.
+    SmartSupplyPro is last and therefore alone in the final row of the
+    two-column grid, which is why it takes `card-centered` (see main.css
+    section 9). If the order changes, `card-centered` moves with whichever
+    card ends up alone in the last row — it belongs to the position, not to
+    the project.
+  {%- endcomment -%}
   {%- include project_card.html
-      label_key="card.label.project"
-      status_key="ssp.status"
-      title_key="ssp.title"
-      desc_key="ssp.desc"
-      docs_url="https://keglev.github.io/inventory-service/"
-      repo_url="https://github.com/Keglev/inventory-service"
-      badges="Java 21, Spring Boot 3, Oracle Autonomous DB, React, TypeScript, Docker, OAuth2/JWT, CI/CD, JaCoCo >85%, REDOC"
+      label_key="card.label.ai"
+      label_class="ai"
+      status_key="ma.status"
+      title_key="ma.title"
+      desc_key="ma.desc"
+      demo_url="https://maintenance.smartsupply.com.de"
+      docs_url="https://keglev.github.io/maintenance-assistant/"
+      repo_url="https://github.com/Keglev/maintenance-assistant"
+      badges="Java 21, Spring Boot 4.1, Angular 22, PostgreSQL 17 + pgvector, RAG, Keycloak / OIDC + PKCE, Docker Compose, GitHub Actions, arc42 + ADRs, EU-hosted LLM"
   -%}
 
   {%- include project_card.html
@@ -50,15 +62,14 @@
   -%}
 
   {%- include project_card.html
-      label_key="card.label.ai"
-      label_class="ai"
-      status_key="ma.status"
-      title_key="ma.title"
-      desc_key="ma.desc"
-      demo_url="https://maintenance.smartsupply.com.de"
-      docs_url="https://keglev.github.io/maintenance-assistant/"
-      repo_url="https://github.com/Keglev/maintenance-assistant"
-      badges="Java 21, Spring Boot 4.1, Angular 22, PostgreSQL 17 + pgvector, RAG, Keycloak / OIDC + PKCE, Docker Compose, GitHub Actions, arc42 + ADRs, EU-hosted LLM"
+      label_key="card.label.project"
+      status_key="ssp.status"
+      title_key="ssp.title"
+      desc_key="ssp.desc"
+      docs_url="https://keglev.github.io/inventory-service/"
+      repo_url="https://github.com/Keglev/inventory-service"
+      badges="Java 21, Spring Boot 3, Oracle Autonomous DB, React, TypeScript, Docker, OAuth2/JWT, CI/CD, JaCoCo >85%, REDOC"
+      extra_class="card-centered"
   -%}
 
 </div>

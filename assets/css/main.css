@@ -186,6 +186,18 @@
             margin-bottom: 16px;
         }
 
+        /* An odd number of cards leaves the last one alone in the final
+           row, hard against the left edge with a gap beside it that reads
+           as a missing card. This spans the row and centres the card at
+           exactly one column's width instead. Apply it to whichever card
+           ends up last — it belongs to the position, not to the project. */
+        .card-centered {
+            grid-column: 1 / -1;
+            max-width: calc(50% - 8px); /* one column, minus half the 16px gap */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* ============================================================
            PROJECT CARD
            Each card displays a project's type label, status, title,
