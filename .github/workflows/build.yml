@@ -116,6 +116,7 @@ jobs:
       # an easy mistake to reintroduce and search engines pick one at random.
       - name: Verify one title and one canonical link per page
         run: |
+          grep -n '<title' _site/index.html || true
           for page in _site/index.html _site/de/index.html; do
             titles=$(grep -o '<title>' "$page" | wc -l)
             canon=$(grep -o 'rel="canonical"' "$page" | wc -l)
