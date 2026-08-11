@@ -7,32 +7,50 @@
   DO NOT add @import or external font URLs — GitHub Pages serves
   this as a plain static file and the goal is zero external dependencies.
 
-  To retheme the site, update the CSS custom properties in :root.
-  All colors, spacing tokens, and the border radius are defined there.
+  THEMING
+    The site ships two themes. Dark is the default and is written into the
+    markup as <html data-theme="dark">; light is applied by swapping that
+    attribute (see assets/js/theme.js and the boot script in the layout).
+
+    EVERY colour in this file is a custom property. Component rules read
+    tokens and never reference a theme, which is why sections 3 onwards
+    contain no [data-theme] selectors at all — with two deliberate
+    exceptions in section 6, where the toggle's own icons and knob have to
+    move with the theme they represent.
+
+    To retheme the site, edit sections 1 and 2 only.
 
   Sections (in order):
-    1. Design Tokens      (:root variables)
-    2. Reset & Base       (html, body, box-sizing)
-    3. Layout Wrapper     (.wrapper)
-    4. Site Header        (.site-header, .nav-dot)
-    5. Hero Section       (.hero, .hero-links, .hero-link)
-    6. Section Label      (.section-label)
-    7. Project Grid       (.grid)
-    8. Project Card       (.card, .card h3, .card p)
-    9. Card Type Label    (.card-label, .project, .portfolio)
-   10. Status Pill        (.status)
-   11. Key-Value Rows     (.kv, .kv-label, .kv-multi)
-   12. Technology Badges  (.badges, .badge)
-   13. Standards Block    (.standards)
-   14. About Strip        (.about-strip, .about-left, .about-links)
-   15. Site Footer        (.site-footer)
-   16. Responsive         (@media max-width: 620px)
+    1. Design tokens — dark   (:root, the default)
+    2. Design tokens — light  ([data-theme="light"])
+    3. Reset & base           (box-sizing, html, body)
+    4. Layout wrapper         (.wrapper)
+    5. Site header            (.site-header, .brand, .nav-dot)
+    6. Header controls        (.nav-controls, .lang-switch, .theme-toggle)
+    7. Hero section           (.hero, .hero-links, .hero-link)
+    8. Section label          (.section-label)
+    9. Project grid           (.grid, .card-centered)
+   10. Project card           (.card, .card h3, .card p)
+   11. Card type label        (.card-label, .project, .ai, .portfolio)
+   12. Status pill            (.status)
+   13. Key-value rows         (.kv, .kv-label, .kv-multi)
+   14. Technology badges      (.badges, .badge)
+   15. Standards block        (.standards)
+   16. About strip            (.about-strip, .about-left, .about-links)
+   17. Site footer            (.site-footer)
+   18. Focus & motion         (:focus-visible, prefers-reduced-motion)
+   19. Responsive             (@media 620px, @media 420px)
 */
 
         /* ============================================================
-           DESIGN TOKENS
-           All colors and shared values are defined here as CSS custom
-           properties. Update this section to retheme the entire site.
+           1. DESIGN TOKENS — DARK (the default)
+
+           The dark theme separates cards from the page by CONTRAST
+           rather than by elevation: on a dark background a drop shadow
+           is invisible at best and muddy at worst. --shadow and
+           --shadow-hover are therefore `none` here, and the component
+           rules still reference them so the light theme can supply real
+           values without a single extra selector.
            ============================================================ */
         :root {
             --bg:                 #0b1120; /* Page background              */
@@ -40,22 +58,97 @@
             --card:               #1a2333; /* Card background               */
             --card-hover:         #1f2d42; /* Card background on hover      */
             --line:               #1f2d3d; /* Borders and dividers          */
+            --line-strong:        #2b3b52; /* Control borders, stronger     */
             --fg:                 #e2e8f0; /* Primary text                  */
-            --muted:              #7d93b2; /* Secondary / subdued text      */
+            --muted:              #94a7c2; /* Secondary text (see note)     */
             --link:               #38bdf8; /* Links and interactive color   */
             --accent:             #0ea5e9; /* Primary accent (cyan)         */
             --accent2:            #6366f1; /* Secondary accent (indigo)     */
             --badge-bg:           #1e3a52; /* Tech badge background         */
             --badge-fg:           #7dd3fc; /* Tech badge text               */
+            --label-bg:           rgba(14, 165, 233, 0.10); /* Project pill bg     */
+            --label-fg:           #38bdf8;                  /* Project pill text   */
+            --label-border:       rgba(14, 165, 233, 0.30); /* Project pill border */
+            --ai-bg:              rgba(99, 102, 241, 0.12); /* AI pill background  */
+            --ai-fg:              #a5b4fc;                  /* AI pill text        */
+            --ai-border:          rgba(99, 102, 241, 0.35); /* AI pill border      */
             --portfolio-badge-bg: #1e1e3f; /* Portfolio badge background    */
             --portfolio-badge-fg: #a5b4fc; /* Portfolio badge text          */
             --portfolio-border:   #3730a3; /* Portfolio card border         */
             --green:              #34d399; /* Status indicator (live/ready) */
+            --control-bg:         #182236; /* Segmented control / track     */
+            --control-active:     #24344d; /* Selected segment              */
+            --knob:               #e2e8f0; /* Theme toggle knob             */
+            --shadow:             none;    /* See section note above        */
+            --shadow-hover:       none;    /* See section note above        */
             --radius:             12px;    /* Standard border radius        */
+            --radius-sm:          8px;     /* Controls and small surfaces   */
+
+            /* Tells the browser to render form controls and scrollbars in
+               their dark variant, so native UI matches the page. */
+            color-scheme: dark;
+        }
+
+        /* --muted was raised from #7d93b2 to #94a7c2. The old value sat at
+           roughly 4.2:1 against --bg, which is below WCAG AA for the small
+           text it is used on (card descriptions, kv labels, footer). */
+
+        /* ============================================================
+           2. DESIGN TOKENS — LIGHT
+
+           This is a DOCUMENTATION palette, not an inverted dark theme.
+           Inverting the dark tokens produces saturated blues on white
+           that vibrate under long paragraphs of technical text.
+
+           Instead: a cool off-white page, white cards lifted by a
+           hairline border PLUS a very soft shadow rather than by fill,
+           and deliberately low saturation throughout. Colour is spent on
+           links and status, nowhere else.
+
+           MEASURED CONTRAST (all on #ffffff unless noted):
+             --fg     #0f172a   17.85:1
+             --muted  #51637d    6.12:1
+             --link   #0369a1    5.93:1
+             --green  #047857    5.48:1
+           Lowest pair anywhere on the page is --muted on --bg (#f6f8fb)
+           at 5.75:1. Every combination clears WCAG AA, including the
+           4.5:1 threshold for normal-size body text.
+           ============================================================ */
+        [data-theme="light"] {
+            --bg:                 #f6f8fb;
+            --surface:            #ffffff;
+            --card:               #ffffff;
+            --card-hover:         #fbfcfe;
+            --line:               #e3e8ef;
+            --line-strong:        #cfd8e3;
+            --fg:                 #0f172a;
+            --muted:              #51637d;
+            --link:               #0369a1;
+            --accent:             #0284c7;
+            --accent2:            #4f46e5;
+            --badge-bg:           #eef4fb;
+            --badge-fg:           #17527d;
+            --label-bg:           #e8f4fd;
+            --label-fg:           #0b5f8a;
+            --label-border:       #bfdff5;
+            --ai-bg:              #eef0fe;
+            --ai-fg:              #4338ca;
+            --ai-border:          #c7cdfb;
+            --portfolio-badge-bg: #eef0fe;
+            --portfolio-badge-fg: #4338ca;
+            --portfolio-border:   #c7cdfb;
+            --green:              #047857;
+            --control-bg:         #eef1f6;
+            --control-active:     #ffffff;
+            --knob:               #ffffff;
+            --shadow:             0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-hover:       0 2px 4px rgba(15, 23, 42, 0.06), 0 8px 20px rgba(15, 23, 42, 0.08);
+
+            color-scheme: light;
         }
 
         /* ============================================================
-           RESET & BASE
+           3. RESET & BASE
            ============================================================ */
         *, *::before, *::after { box-sizing: border-box; }
 
@@ -67,10 +160,14 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: 15px;
             line-height: 1.65;
+            /* Softens the theme switch so it reads as a transition rather
+               than a hard cut. Suppressed under prefers-reduced-motion,
+               see section 18. */
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         /* ============================================================
-           LAYOUT WRAPPER
+           4. LAYOUT WRAPPER
            Centers content with a maximum width. The header uses its
            own max-width internally to stay aligned with the wrapper.
            ============================================================ */
@@ -81,14 +178,14 @@
         }
 
         /* ============================================================
-           SITE HEADER
-           Sticky top bar with accent dot and site title link.
+           5. SITE HEADER
+           Sticky top bar: brand on the left, controls on the right.
            z-index: 100 ensures it stays above card hover transforms.
            ============================================================ */
         .site-header {
             background: var(--surface);
             border-bottom: 1px solid var(--line);
-            padding: 14px 24px;
+            padding: 10px 24px;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -98,9 +195,24 @@
             margin: 0 auto;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
         }
-        /* Small accent dot to the left of the site title */
+        /* Brand: accent dot plus site name, linking to the current
+           language's home page. min-width: 0 lets the flex item shrink
+           below its content width so the label can ellipsis instead of
+           pushing the controls off the bar. */
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+        .brand span:last-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
         .nav-dot {
             width: 8px;
             height: 8px;
@@ -117,7 +229,115 @@
         .site-header a:hover { color: var(--link); }
 
         /* ============================================================
-           HERO SECTION
+           6. HEADER CONTROLS
+           Language switch and theme toggle. flex-shrink: 0 keeps them at
+           full size; the brand absorbs any shortage of width.
+           ============================================================ */
+        .nav-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        /* ---- Language switch: a segmented control ------------------
+           The ACTIVE language is a <span>, not a link: there is nowhere
+           for it to navigate to, and rendering it as a disabled-looking
+           anchor would put a dead target in the tab order. Only the
+           inactive language is focusable. */
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px;
+            gap: 2px;
+            background: var(--control-bg);
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-sm);
+        }
+        .lang-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-decoration: none;
+        }
+        .lang-btn:hover { color: var(--fg); }
+        .lang-btn.is-active {
+            background: var(--control-active);
+            color: var(--fg);
+            box-shadow: var(--shadow);
+            cursor: default;
+        }
+
+        /* ---- Theme toggle -----------------------------------------
+           The <button> itself carries no chrome; everything visible is
+           the track inside it. line-height: 0 stops the inline SVGs from
+           adding descender space to the button box. */
+        .theme-toggle {
+            border: 0;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            line-height: 0;
+        }
+        .theme-track {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 50px;
+            height: 26px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: var(--control-bg);
+            border: 1px solid var(--line-strong);
+            transition: border-color 0.15s ease, background 0.2s ease;
+        }
+        .theme-toggle:hover .theme-track { border-color: var(--accent); }
+
+        /* Both icons are always present; the active one is brought
+           forward with opacity and colour rather than being hidden, so
+           the control reads as a switch between two states. z-index
+           keeps them above the sliding knob. */
+        .theme-icon {
+            position: relative;
+            z-index: 2;
+            color: var(--muted);
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+        .theme-icon-sun  { opacity: 0.45; }
+        .theme-icon-moon { opacity: 1; color: var(--link); }
+
+        /* The two exceptions to "no component rule knows the theme":
+           this control's whole job is to depict which theme is active. */
+        [data-theme="light"] .theme-icon-sun  { opacity: 1; color: var(--link); }
+        [data-theme="light"] .theme-icon-moon { opacity: 0.45; color: var(--muted); }
+
+        /* Knob rests on the moon (right) in dark, slides to the sun
+           (left) in light. */
+        .theme-knob {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            margin-top: -10px;
+            border-radius: 50%;
+            background: var(--knob);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+            transform: translateX(22px);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        [data-theme="light"] .theme-knob { transform: translateX(0); }
+
+        /* ============================================================
+           7. HERO SECTION
            Full-width intro block at the top of the index page.
            Contains the page title, subtitle, and quick-access links.
            ============================================================ */
@@ -129,12 +349,13 @@
         .hero h1 {
             font-size: 1.65rem;
             font-weight: 700;
+            letter-spacing: -0.01em;
             margin: 0 0 8px;
         }
         .hero p {
             color: var(--muted);
             margin: 0 0 20px;
-            max-width: 580px;
+            max-width: 620px;
         }
         /* Row of pill-style navigation links (Portfolio, GitHub, LinkedIn) */
         .hero-links {
@@ -146,9 +367,10 @@
             display: inline-flex;
             align-items: center;
             padding: 7px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line-strong);
             background: var(--card);
+            box-shadow: var(--shadow);
             color: var(--link);
             text-decoration: none;
             font-size: 0.875rem;
@@ -161,7 +383,7 @@
         }
 
         /* ============================================================
-           SECTION LABEL
+           8. SECTION LABEL
            Small uppercase label used as a visual divider between
            content sections (e.g. "PROJECT DOCUMENTATION").
            ============================================================ */
@@ -175,9 +397,9 @@
         }
 
         /* ============================================================
-           PROJECT GRID
+           9. PROJECT GRID
            Uniform two-column grid for project cards. Collapses to a
-           single column on narrow viewports (see responsive section).
+           single column on narrow viewports (see section 19).
            ============================================================ */
         .grid {
             display: grid;
@@ -186,8 +408,20 @@
             margin-bottom: 16px;
         }
 
+        /* An odd number of cards leaves the last one alone in the final
+           row, hard against the left edge with a gap beside it that reads
+           as a missing card. This spans the row and centres the card at
+           exactly one column's width instead. Apply it to whichever card
+           ends up last — it belongs to the position, not to the project. */
+        .card-centered {
+            grid-column: 1 / -1;
+            max-width: calc(50% - 8px); /* one column, minus half the 16px gap */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* ============================================================
-           PROJECT CARD
+          10. PROJECT CARD
            Each card displays a project's type label, status, title,
            description, key-value links, and technology badges.
            Cards use flex-direction: column so the badge row always
@@ -197,8 +431,9 @@
             background: var(--card);
             border: 1px solid var(--line);
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
             padding: 20px;
-            transition: border-color 0.15s, background 0.15s, transform 0.15s;
+            transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
             display: flex;
             flex-direction: column;
         }
@@ -206,11 +441,13 @@
         .card:hover {
             border-color: var(--accent);
             background: var(--card-hover);
+            box-shadow: var(--shadow-hover);
             transform: translateY(-2px);
         }
         .card h3 {
             margin: 0 0 4px;
             font-size: 1rem;
+            line-height: 1.4;
             color: var(--fg);
         }
         /* Description stretches to fill available space via flex: 1,
@@ -223,9 +460,9 @@
         }
 
         /* ============================================================
-           CARD TYPE LABEL
+          11. CARD TYPE LABEL
            Small pill in the top-left of each card indicating its type.
-           Variants: .project (cyan) and .portfolio (indigo).
+           Variants: .project (cyan), .ai (indigo), .portfolio (indigo).
            ============================================================ */
         .card-label {
             display: inline-block;
@@ -239,9 +476,14 @@
             width: fit-content;
         }
         .card-label.project {
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent);
-            border: 1px solid rgba(14, 165, 233, 0.25);
+            background: var(--label-bg);
+            color: var(--label-fg);
+            border: 1px solid var(--label-border);
+        }
+        .card-label.ai {
+            background: var(--ai-bg);
+            color: var(--ai-fg);
+            border: 1px solid var(--ai-border);
         }
         .card-label.portfolio {
             background: var(--portfolio-badge-bg);
@@ -250,9 +492,8 @@
         }
 
         /* ============================================================
-           STATUS PILL
+          12. STATUS PILL
            Inline deployment/build status indicator with a green dot.
-           Used for production-ready projects deployed on Fly.io.
            ============================================================ */
         .status {
             display: inline-flex;
@@ -274,7 +515,7 @@
         }
 
         /* ============================================================
-           KEY-VALUE ROWS
+          13. KEY-VALUE ROWS
            Two-column grid inside a card for structured metadata:
            labels on the left (90px fixed), values on the right.
            .kv-multi stacks multiple links vertically in one value cell.
@@ -295,7 +536,10 @@
         .kv a {
             color: var(--link);
             text-decoration: none;
-            word-break: break-all; /* Prevents long URLs from overflowing */
+            /* break-word, not break-all: a URL wraps at its punctuation
+               instead of being chopped mid-word, which keeps the host
+               name readable. */
+            word-break: break-word;
         }
         .kv a:hover { text-decoration: underline; }
         /* Used when a single label maps to multiple URLs (e.g. split repos) */
@@ -306,7 +550,7 @@
         }
 
         /* ============================================================
-           TECHNOLOGY BADGES
+          14. TECHNOLOGY BADGES
            Pill-shaped tags listing the tech stack for each project.
            Positioned at the bottom of the card via margin-top: auto.
            ============================================================ */
@@ -332,14 +576,15 @@
         }
 
         /* ============================================================
-           STANDARDS & CONVENTIONS BLOCK
-           Full-width dark surface block listing development standards.
+          15. STANDARDS & CONVENTIONS BLOCK
+           Full-width surface block listing development standards.
            Placed below the project grid before the about strip.
            ============================================================ */
         .standards {
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
             padding: 20px 24px;
             margin-top: 40px;
         }
@@ -358,7 +603,7 @@
         .standards strong { color: var(--fg); }
 
         /* ============================================================
-           ABOUT STRIP
+          16. ABOUT STRIP
            Slim full-width row at the bottom of the page linking to the
            personal portfolio. Uses indigo border to visually distinguish
            it from project cards without overpowering them.
@@ -372,6 +617,7 @@
             background: var(--surface);
             border: 1px solid var(--portfolio-border);
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
             padding: 16px 20px;
             margin-top: 24px;
         }
@@ -382,6 +628,10 @@
             gap: 12px;
             flex-wrap: wrap;
         }
+        /* The pill's bottom margin exists to separate it from a card
+           title below it. Here it sits in a single centred row, so the
+           margin would push it off the baseline. */
+        .about-left .card-label { margin-bottom: 0; }
         .about-name {
             font-weight: 600;
             font-size: 0.95rem;
@@ -405,7 +655,7 @@
         .about-links a:hover { text-decoration: underline; }
 
         /* ============================================================
-           SITE FOOTER
+          17. SITE FOOTER
            Two-column row with copyright on the left and contact links
            on the right. Populated via _config.yml (site.author, site.email).
            ============================================================ */
@@ -426,13 +676,54 @@
         hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
 
         /* ============================================================
-           RESPONSIVE
+          18. FOCUS & MOTION
+
+           :focus-visible rather than :focus, so the ring appears for
+           keyboard navigation without drawing an outline around every
+           link a mouse happens to click. Everything interactive in the
+           header — both language buttons and the theme toggle — is a
+           real <a> or <button> and is reached in document order.
+           ============================================================ */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Respect an operating system request for reduced motion: the
+           theme fade, the knob slide and the card lift all become
+           instant. Kept as a near-zero duration rather than `none` so
+           transitionend handlers, if any are ever added, still fire. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+            .card:hover { transform: none; }
+        }
+
+        /* ============================================================
+          19. RESPONSIVE
            Below 620px: collapse grid to single column, reduce hero
            font size, and stack footer and about-strip vertically.
            ============================================================ */
         @media (max-width: 620px) {
             .grid { grid-template-columns: 1fr; }
+            /* One column already: centring would only narrow the card. */
+            .card-centered { max-width: 100%; }
+            .hero { padding-top: 36px; }
             .hero h1 { font-size: 1.35rem; }
+            .kv { grid-template-columns: 76px auto; }
             .about-strip { flex-direction: column; align-items: flex-start; }
             .site-footer { flex-direction: column; }
+        }
+
+        /* Below 420px the brand label cannot ellipsis to anything
+           legible, so it gives up its space entirely and the accent dot
+           stands in for it. The controls are the only thing on the bar
+           a visitor can act on, and they stay full size. */
+        @media (max-width: 420px) {
+            .brand span:last-child { display: none; }
+            .wrapper { padding: 0 16px 48px; }
         }

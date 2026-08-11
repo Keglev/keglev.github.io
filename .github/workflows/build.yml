@@ -1,0 +1,152 @@
+# .github/workflows/build.yml
+# ===========================
+# Builds the site on every pull request and on every push to main.
+#
+# WHY THIS EXISTS
+#   GitHub Pages builds this site automatically, but only AFTER a merge to
+#   main — and when that build fails, the previously deployed site simply
+#   stays live with no obvious signal. This workflow moves the same build
+#   forward to the pull request, so a template error is caught before merge.
+#
+#   It does NOT deploy. Deployment remains the standard GitHub Pages build
+#   from the main branch; this job only proves the site compiles.
+#
+# TIMEOUT
+#   The 5-minute limit is deliberate. A self-referential Liquid include
+#   (an {% include %} example left unescaped inside a template's own
+#   documentation header) does not raise an error — it recurses until the
+#   process exhausts memory. A hard timeout turns that hang into a fast,
+#   readable failure.
+
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Matches the Ruby line GitHub Pages builds with. Ruby 3.4 removed
+          # csv and base64 from the default gems, which breaks Jekyll 3.10.
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Build the site
+        run: bundle exec jekyll build --trace
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify both language pages were generated
+        run: |
+          test -f _site/index.html    || { echo "missing _site/index.html"; exit 1; }
+          test -f _site/de/index.html || { echo "missing _site/de/index.html"; exit 1; }
+          grep -q 'html lang="de"' _site/de/index.html \
+            || { echo "German page is not marked lang=de"; exit 1; }
+          echo "Both language pages built."
+
+      - name: Verify removed content is gone
+        run: |
+          ! grep -riq "restaurant" _site/      || { echo "Restaurant Speisekarte still referenced"; exit 1; }
+          ! grep -rq "Keglev/frontend" _site/  || { echo "old StockEase frontend repo still linked"; exit 1; }
+          echo "Removed content is absent."
+
+      - name: Verify the centred card is unique
+        run: |
+          count=$(grep -o 'card-centered' _site/index.html | wc -l)
+          [ "$count" -eq 1 ] || { echo "card-centered appears $count times, expected 1"; exit 1; }
+          echo "card-centered is applied to exactly one card."
+
+      - name: Verify the new project is present
+        run: |
+          grep -q 'maintenance-assistant' _site/index.html \
+            || { echo "Maintenance Assistant repository/docs link missing"; exit 1; }
+          grep -q 'maintenance.smartsupply.com.de' _site/index.html \
+            || { echo "Maintenance Assistant live demo link missing"; exit 1; }
+          echo "Maintenance Assistant is on the page."
+
+      # The order of the cards is a content decision, not an accident:
+      # the strongest project leads. Asserting it here means a reorder has
+      # to be deliberate rather than a side effect of editing page_body.
+      - name: Verify card order
+        run: |
+          # Match only the leading ASCII word of each title. The titles
+          # contain em dashes, and cutting them by character count splits a
+          # multibyte sequence and produces an unstable comparison string.
+          order=$(grep -o '<h3>[A-Za-z]*' _site/index.html | sed 's|<h3>||' | paste -sd'|')
+          echo "order: $order"
+          [ "$order" = "Maintenance|StockEase|SmartSupplyPro" ] \
+            || { echo "unexpected card order"; exit 1; }
+          echo "Card order is correct."
+
+      - name: Verify StockEase has exactly one repository link
+        run: |
+          # Count hrefs, not bare occurrences: every repository URL appears
+          # twice by design, once as the target and once as the link text.
+          count=$(grep -o 'href="https://github.com/Keglev/stockease"' _site/index.html | wc -l)
+          [ "$count" -eq 1 ] || { echo "stockease repo link appears $count times, expected 1"; exit 1; }
+          echo "StockEase links a single repository."
+
+      # Regression guard for the link-text filter. The previous version used
+      # `remove: '/'`, which deleted EVERY slash rather than the trailing
+      # one, rendering "keglev.github.ioinventory-service".
+      - name: Verify link text keeps internal slashes and drops the trailing one
+        run: |
+          grep -q '>keglev.github.io/inventory-service<' _site/index.html \
+            || { echo "docs link text is malformed"; exit 1; }
+          ! grep -q 'keglev.github.ioinventory-service' _site/index.html \
+            || { echo "every slash was stripped from the URL again"; exit 1; }
+          echo "Link text is correct."
+
+      # jekyll-seo-tag owns both. A hand-written duplicate in the layout is
+      # an easy mistake to reintroduce and search engines pick one at random.
+      - name: Verify one title and one canonical link per page
+        run: |
+          # Count closing title tags and full canonical link tags. Matching
+          # the opening forms would also match any prose in an HTML comment
+          # that happens to name them.
+          for page in _site/index.html _site/de/index.html; do
+            titles=$(grep -o '</title>' "$page" | wc -l)
+            canon=$(grep -o '<link rel="canonical"' "$page" | wc -l)
+            [ "$titles" -eq 1 ] || { echo "$page has $titles <title> tags, expected 1"; exit 1; }
+            [ "$canon" -eq 1 ] || { echo "$page has $canon canonical links, expected 1"; exit 1; }
+          done
+          echo "Exactly one title and one canonical link per page."
+
+      - name: Verify the German page is actually German
+        run: |
+          grep -q 'Wartungsassistent' _site/de/index.html \
+            || { echo "German page is missing translated project title"; exit 1; }
+          grep -q 'Projektdokumentation' _site/de/index.html \
+            || { echo "German page is missing translated section label"; exit 1; }
+          grep -q 'hreflang="en"' _site/de/index.html \
+            || { echo "German page does not link back to the English one"; exit 1; }
+          echo "German page is translated and links back to /."
+
+      # A key present in one language and missing in the other renders as an
+      # empty string, silently. This is the only check that catches it.
+      - name: Verify EN/DE catalogue parity
+        run: |
+          ruby -ryaml -e '
+            c = YAML.load_file("_data/i18n.yml")
+            en, de = c["en"].keys.sort, c["de"].keys.sort
+            missing_de = en - de
+            missing_en = de - en
+            abort("missing under de: #{missing_de.join(", ")}") unless missing_de.empty?
+            abort("missing under en: #{missing_en.join(", ")}") unless missing_en.empty?
+            puts "Catalogue parity: #{en.size} keys under both en and de."
+          '
