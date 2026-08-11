@@ -95,7 +95,9 @@ jobs:
 
       - name: Verify StockEase has exactly one repository link
         run: |
-          count=$(grep -o 'github.com/Keglev/stockease' _site/index.html | wc -l)
+          # Count hrefs, not bare occurrences: every repository URL appears
+          # twice by design, once as the target and once as the link text.
+          count=$(grep -o 'href="https://github.com/Keglev/stockease"' _site/index.html | wc -l)
           [ "$count" -eq 1 ] || { echo "stockease repo link appears $count times, expected 1"; exit 1; }
           echo "StockEase links a single repository."
 
