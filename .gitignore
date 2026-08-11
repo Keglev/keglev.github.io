@@ -1,0 +1,20 @@
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+#
+# Gemfile.lock is deliberately NOT committed. GitHub Pages builds this site
+# server-side with its own resolved gem set and ignores any lock file in the
+# repository, so committing one pins versions that the deployed build will
+# never use while pretending to be authoritative. The `github-pages` gem in
+# the Gemfile is what actually fixes the versions.
+Gemfile.lock
+vendor/
+.bundle/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db

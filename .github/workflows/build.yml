@@ -1,0 +1,72 @@
+# .github/workflows/build.yml
+# ===========================
+# Builds the site on every pull request and on every push to main.
+#
+# WHY THIS EXISTS
+#   GitHub Pages builds this site automatically, but only AFTER a merge to
+#   main — and when that build fails, the previously deployed site simply
+#   stays live with no obvious signal. This workflow moves the same build
+#   forward to the pull request, so a template error is caught before merge.
+#
+#   It does NOT deploy. Deployment remains the standard GitHub Pages build
+#   from the main branch; this job only proves the site compiles.
+#
+# TIMEOUT
+#   The 5-minute limit is deliberate. A self-referential Liquid include
+#   (an {% include %} example left unescaped inside a template's own
+#   documentation header) does not raise an error — it recurses until the
+#   process exhausts memory. A hard timeout turns that hang into a fast,
+#   readable failure.
+
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Matches the Ruby line GitHub Pages builds with. Ruby 3.4 removed
+          # csv and base64 from the default gems, which breaks Jekyll 3.10.
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Build the site
+        run: bundle exec jekyll build --trace
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify both language pages were generated
+        run: |
+          test -f _site/index.html    || { echo "missing _site/index.html"; exit 1; }
+          test -f _site/de/index.html || { echo "missing _site/de/index.html"; exit 1; }
+          grep -q 'html lang="de"' _site/de/index.html \
+            || { echo "German page is not marked lang=de"; exit 1; }
+          echo "Both language pages built."
+
+      - name: Verify removed content is gone
+        run: |
+          ! grep -riq "restaurant" _site/      || { echo "Restaurant Speisekarte still referenced"; exit 1; }
+          ! grep -rq "Keglev/frontend" _site/  || { echo "old StockEase frontend repo still linked"; exit 1; }
+          echo "Removed content is absent."
+
+      - name: Verify the centred card is unique
+        run: |
+          count=$(grep -o 'card-centered' _site/index.html | wc -l)
+          [ "$count" -eq 1 ] || { echo "card-centered appears $count times, expected 1"; exit 1; }
+          echo "card-centered is applied to exactly one card."
