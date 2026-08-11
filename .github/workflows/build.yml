@@ -84,12 +84,14 @@ jobs:
       # to be deliberate rather than a side effect of editing page_body.
       - name: Verify card order
         run: |
-          order=$(grep -o '<h3>[^<]*' _site/index.html | sed 's|<h3>||' | cut -c1-12 | paste -sd'|')
+          # Match only the leading ASCII word of each title. The titles
+          # contain em dashes, and cutting them by character count splits a
+          # multibyte sequence and produces an unstable comparison string.
+          order=$(grep -o '<h3>[A-Za-z]*' _site/index.html | sed 's|<h3>||' | paste -sd'|')
           echo "order: $order"
-          case "$order" in
-            "Maintenance |StockEase — |SmartSupplyP") echo "Card order is correct." ;;
-            *) echo "unexpected card order"; exit 1 ;;
-          esac
+          [ "$order" = "Maintenance|StockEase|SmartSupplyPro" ] \
+            || { echo "unexpected card order"; exit 1; }
+          echo "Card order is correct."
 
       - name: Verify StockEase has exactly one repository link
         run: |
