@@ -71,12 +71,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--
-      jekyll-seo-tag renders <title>, the meta description, the canonical
-      link and the Open Graph / Twitter Card tags from the front matter of
-      the page. index.md and de/index.md each carry their own translated
-      `title` and `description`, so both language versions have correct
-      metadata without a second source of truth. Do not add a second
-      <title> or a second <link rel="canonical"> here.
+      jekyll-seo-tag renders the title element, the meta description, the
+      canonical link and the Open Graph / Twitter Card tags from the front
+      matter of the page. index.md and de/index.md each carry their own
+      translated `title` and `description`, so both language versions have
+      correct metadata without a second source of truth.
+
+      Do not add a title element or a canonical link of your own here. Two
+      of either is not an error a build will catch — search engines simply
+      pick one, and it may not be the translated one. Written out in words
+      rather than as literal tags so that a grep over the built page finds
+      the real elements and not this comment.
     -->
     {% seo %}
 
