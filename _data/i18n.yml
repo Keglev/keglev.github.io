@@ -1,0 +1,158 @@
+# _data/i18n.yml
+# =========================================================================
+# Bilingual string catalogue for the Project Documentation Hub.
+#
+# HOW IT WORKS
+#   Translation happens at BUILD time, not in the browser. Each page
+#   declares its language in front matter (`lang: en` or `lang: de`) and
+#   the templates resolve every visible string through:
+#
+#       {%- assign t = site.data.i18n[page.lang] -%}
+#       {{ t['hero.title'] }}
+#
+#   Jekyll then renders two fully static pages from one template:
+#       /      from index.md     (lang: en)  -- default
+#       /de/   from de/index.md  (lang: de)
+#
+#   Consequences that matter: both languages are indexed by search
+#   engines, the German page has its own shareable URL, and no JavaScript
+#   runs to produce the text.
+#
+# RULES
+#   - Every key MUST exist under BOTH `en` and `de`. A missing key renders
+#     as an empty string, silently, so parity is checked in review.
+#   - Keys are flat dotted strings grouped by page area, so the catalogue
+#     can be diffed without reading the markup.
+#   - Keys ending in `_html` may contain inline markup such as <strong>.
+#     Everything else is plain text.
+#   - Product names, technology names and URLs are NOT translated and do
+#     not belong in this file. Technology badges are passed inline to the
+#     project_card include.
+#
+# ADDING A STRING
+#   Add the key under `en`, add the same key under `de`, then reference it
+#   as {{ t['your.key'] }}. Never hardcode visible text in a template.
+#
+# NOT IN THIS FILE
+#   The <title> and meta description are per-page SEO metadata, not body
+#   copy. They live in the front matter of index.md and de/index.md and are
+#   rendered by the jekyll-seo-tag plugin.
+# =========================================================================
+
+en:
+  # ---- Header ------------------------------------------------------------
+  nav.brand: "Carlos Keglevich · Documentation Hub"
+  nav.theme.label: "Switch colour theme"
+  nav.theme.toDark: "Switch to dark theme"
+  nav.theme.toLight: "Switch to light theme"
+  nav.lang.label: "Select language"
+  nav.lang.en: "English"
+  nav.lang.de: "German"
+
+  # ---- Hero --------------------------------------------------------------
+  hero.title: "Project Documentation Hub"
+  hero.subtitle: "Technical documentation, live demos and API references for my public projects. Every project starts from a real business problem — maintenance, procurement and inventory — not from a tutorial."
+  hero.link.portfolio: "Portfolio"
+  hero.link.github: "GitHub"
+  hero.link.linkedin: "LinkedIn"
+
+  # ---- Section labels ----------------------------------------------------
+  section.projects: "Project documentation"
+
+  # ---- Card chrome -------------------------------------------------------
+  card.label.project: "Project"
+  card.label.portfolio: "Portfolio"
+  card.kv.docs: "Docs"
+  card.kv.repo: "Repository"
+  card.kv.repos: "Repositories"
+  card.kv.demo: "Live demo"
+
+  # ---- Project: SmartSupplyPro ------------------------------------------
+  ssp.status: "Production-ready · Deployed on Fly.io"
+  ssp.title: "SmartSupplyPro — Procurement & Supplier Management"
+  ssp.desc: "Enterprise-grade API for purchasing and supplier evaluation. 36 endpoints, weighted-average-cost inventory valuation, price trend analysis and automatic shortage alerts — replacing manual Excel workflows. OAuth2/JWT security, CI/CD pipeline, test coverage above 85 percent (JaCoCo), full REDOC API reference."
+
+  # ---- Project: StockEase -----------------------------------------------
+  se.status: "Production-ready · Deployed on Fly.io"
+  se.title: "StockEase — Inventory Management"
+  se.desc: "Full-stack inventory system for small businesses. Capital value visualisation and Excel BI export without the cost of an ERP suite. Split into a backend API and a separate React front end repository."
+
+  # ---- Project: Restaurant Speisekarte ----------------------------------
+  rs.title: "Restaurant Speisekarte — Static Menu App"
+  rs.desc: "Lightweight React app for publishing a restaurant menu. Clean UI, zero-backend architecture, fast static deployment."
+
+  # ---- Standards block ---------------------------------------------------
+  standards.title: "Standards & conventions"
+  standards.item1_html: "<strong>Documentation first.</strong> Every project ships a structured README, architecture notes and an API or usage guide. Design decisions are recorded, not remembered."
+  standards.item2_html: "<strong>Reproducible builds.</strong> CI/CD pipelines run linting and tests, publish coverage reports and deploy the documentation automatically."
+  standards.item3_html: "<strong>Clarity over noise.</strong> Minimal styling, consistent navigation, practical examples — and an honest scope section in every README."
+
+  # ---- About strip -------------------------------------------------------
+  about.name: "Carlos Keglevich"
+  about.role: "Java Full Stack Developer · Fürth, Germany"
+  about.link.portfolio: "carloskeglevich.vercel.app"
+  about.link.docs: "Docs & coverage"
+  about.link.repo: "Repository"
+
+  # ---- Footer ------------------------------------------------------------
+  footer.rights: "Content and code available under their respective licenses."
+  footer.linkedin: "LinkedIn"
+
+de:
+  # ---- Kopfzeile ---------------------------------------------------------
+  nav.brand: "Carlos Keglevich · Dokumentation"
+  nav.theme.label: "Farbschema wechseln"
+  nav.theme.toDark: "Zu dunklem Farbschema wechseln"
+  nav.theme.toLight: "Zu hellem Farbschema wechseln"
+  nav.lang.label: "Sprache auswählen"
+  nav.lang.en: "Englisch"
+  nav.lang.de: "Deutsch"
+
+  # ---- Hero --------------------------------------------------------------
+  hero.title: "Projekt-Dokumentation"
+  hero.subtitle: "Technische Dokumentation, Live-Demos und API-Referenzen zu meinen öffentlichen Projekten. Jedes Projekt geht von einem realen betrieblichen Problem aus — Instandhaltung, Einkauf und Lagerhaltung — nicht von einem Tutorial."
+  hero.link.portfolio: "Portfolio"
+  hero.link.github: "GitHub"
+  hero.link.linkedin: "LinkedIn"
+
+  # ---- Abschnittsbezeichnungen ------------------------------------------
+  section.projects: "Projektdokumentation"
+
+  # ---- Kartenelemente ----------------------------------------------------
+  card.label.project: "Projekt"
+  card.label.portfolio: "Portfolio"
+  card.kv.docs: "Doku"
+  card.kv.repo: "Repository"
+  card.kv.repos: "Repositories"
+  card.kv.demo: "Live-Demo"
+
+  # ---- Projekt: SmartSupplyPro ------------------------------------------
+  ssp.status: "Produktionsreif · Bereitgestellt auf Fly.io"
+  ssp.title: "SmartSupplyPro — Einkauf und Lieferantenmanagement"
+  ssp.desc: "API auf Unternehmensniveau für Einkauf und Lieferantenbewertung. 36 Endpunkte, Bestandsbewertung nach gleitendem Durchschnittspreis, Preistrendanalyse und automatische Warnmeldungen bei Unterdeckung — als Ersatz für manuelle Excel-Prozesse. Absicherung über OAuth2/JWT, CI/CD-Pipeline, Testabdeckung über 85 Prozent (JaCoCo), vollständige API-Referenz mit REDOC."
+
+  # ---- Projekt: StockEase -----------------------------------------------
+  se.status: "Produktionsreif · Bereitgestellt auf Fly.io"
+  se.title: "StockEase — Lagerverwaltung"
+  se.desc: "Full-Stack-Lagerverwaltung für kleine Betriebe. Visualisierung des gebundenen Kapitals und Excel-Export für Auswertungen, ohne die Kosten einer ERP-Suite. Aufgeteilt in ein Backend-API- und ein separates React-Frontend-Repository."
+
+  # ---- Projekt: Restaurant-Speisekarte ----------------------------------
+  rs.title: "Restaurant-Speisekarte — statische Menü-App"
+  rs.desc: "Schlanke React-Anwendung zur Veröffentlichung einer Speisekarte. Klare Oberfläche, Architektur ohne Backend, schnelle statische Bereitstellung."
+
+  # ---- Standards ---------------------------------------------------------
+  standards.title: "Standards und Konventionen"
+  standards.item1_html: "<strong>Dokumentation zuerst.</strong> Jedes Projekt enthält eine strukturierte README, Architekturnotizen sowie eine API- oder Bedienungsanleitung. Entwurfsentscheidungen werden festgehalten, nicht erinnert."
+  standards.item2_html: "<strong>Reproduzierbare Builds.</strong> CI/CD-Pipelines führen Linting und Tests aus, veröffentlichen Coverage-Berichte und stellen die Dokumentation automatisch bereit."
+  standards.item3_html: "<strong>Klarheit statt Zierrat.</strong> Zurückhaltendes Design, einheitliche Navigation, praxisnahe Beispiele — und in jeder README ein ehrlicher Abschnitt zum Leistungsumfang."
+
+  # ---- Kurzprofil --------------------------------------------------------
+  about.name: "Carlos Keglevich"
+  about.role: "Java Full Stack Entwickler · Fürth, Deutschland"
+  about.link.portfolio: "carloskeglevich.vercel.app"
+  about.link.docs: "Doku & Coverage"
+  about.link.repo: "Repository"
+
+  # ---- Fußzeile ----------------------------------------------------------
+  footer.rights: "Inhalte und Quellcode stehen unter den jeweils angegebenen Lizenzen."
+  footer.linkedin: "LinkedIn"

@@ -1,111 +1,128 @@
 {% comment %}
   _includes/project_card.html
   ===========================
-  Reusable project card component for the documentation hub index page.
+  Reusable project card for the documentation hub landing page.
 
   CRITICAL — WHY THIS HEADER IS A LIQUID COMMENT AND NOT AN HTML COMMENT
     Liquid runs before the browser ever sees the file, and it does not know
-    what an HTML comment is. A literal {% raw %}{% include project_card.html %}{% endraw %}
-    written inside <!-- ... --> is therefore still executed: the include
-    pulls in its own file, which executes the example again, forever. The
-    build does not error — it recurses until the process runs out of memory
-    and the `jekyll build` command simply hangs.
+    what an HTML comment is. A literal include tag written inside
+    <!-- ... --> is therefore still executed: the include pulls in its own
+    file, which executes the example again, forever. The build does not
+    error — it recurses until the process runs out of memory and
+    `jekyll build` simply hangs.
 
     Any documentation header in _includes/ or _layouts/ that contains
-    {% raw %}{%{% endraw %} or {% raw %}{{{% endraw %} must use {% raw %}{% comment %}{% endraw %} ... {% raw %}{% endcomment %}{% endraw %},
-    and any tag shown as an example must be wrapped in {% raw %}{% raw %}{% endraw %}.
+    {% raw %}{%{% endraw %} or {% raw %}{{{% endraw %} must use a Liquid comment block, and any tag shown
+    as an example must additionally be wrapped in {% raw %}{% raw %}{% endraw %}.
 
-  USAGE (in index.md):
-    {% raw %}{% include project_card.html
-       title="Project Name"
-       description="Short description."
-       status="Production-ready · Deployed on Fly.io"
-       docs_url="https://keglev.github.io/project/"
-       repo_url="https://github.com/Keglev/project"
-       repo2_url="https://github.com/Keglev/project-frontend"
-       badges="Java 21, Spring Boot 3, React"
-    %}{% endraw %}
+  THIS CARD RENDERS NO LITERAL TEXT OF ITS OWN
+    Every visible string is a KEY into _data/i18n.yml, resolved for the
+    language the current page declares in its front matter. That is why
+    the parameters are named *_key rather than carrying the text itself:
+    one include call produces the English and the German card.
 
-  PARAMETERS:
-    title        (required) Display name of the project.
-    description  (required) One or two sentence summary.
-    status       (optional) Deployment or build status line. Renders with
-                            a green indicator dot via the .status CSS class.
-    docs_url     (optional) URL to the project's generated documentation.
-    repo_url     (required) Primary GitHub repository URL.
-    repo2_url    (optional) Secondary repository URL (e.g. frontend split).
-                            Rendered as a second line under "Repositories".
-    badges       (optional) Comma-separated list of technology labels.
-                            Rendered as pill badges at the bottom of the card.
+  USAGE (from _includes/page_body.html):
+    {% raw %}{%- include project_card.html
+        label_key="card.label.project"
+        status_key="se.status"
+        title_key="se.title"
+        desc_key="se.desc"
+        docs_url="https://keglev.github.io/stockease/"
+        repo_url="https://github.com/Keglev/stockease"
+        badges="Java 21, Spring Boot 3, Angular"
+    -%}{% endraw %}
 
-  CARD TYPES:
-    - Default card: standard project documentation entry.
-    - Portfolio card: add class="card portfolio-card" manually in index.md
-      if you need the indigo border accent for the personal portfolio entry.
+  PARAMETERS
+    label_key    (required) i18n key for the type pill, e.g. card.label.ai
+    title_key    (required) i18n key for the project title
+    desc_key     (required) i18n key for the description paragraph
+    status_key   (optional) i18n key for the status line. Renders with a
+                            green indicator dot via the .status class.
+    demo_url     (optional) URL of a running deployment. Rendered first.
+    docs_url     (optional) URL of the generated documentation.
+    repo_url     (optional) Primary repository URL.
+    repo2_url    (optional) Secondary repository URL (e.g. a split front
+                            end). Its presence switches the label to the
+                            plural key and stacks both links.
+    badges       (optional) Comma-separated technology list. Product names,
+                            deliberately NOT translated.
+    label_class  (optional) Variant class for the type pill: `project`
+                            (default) or `ai`. See main.css section 11.
+    extra_class  (optional) Extra class on .card, e.g. `card-centered`
+                            for a card left alone in the final grid row.
 
-  NOTES:
-    - URLs are displayed without the https:// prefix for readability.
-    - All external links open in a new tab (target="_blank").
-    - Badge list uses Liquid's split filter on the comma-separated string.
-    - This include does not output a wrapping .grid element; the caller
-      is responsible for placing this inside a <div class="grid"> block.
+  NOTES
+    - All external links open in a new tab with rel="noopener".
+    - This include does not emit the wrapping .grid element; the caller is
+      responsible for placing it inside <div class="grid">.
 {% endcomment %}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign label_class = include.label_class | default: 'project' -%}
 
-<div class="card">
+{% comment %}
+  LINK TEXT: strip the scheme and ONLY a trailing slash.
 
-  <!-- Project type label (always "Project" for standard entries) -->
-  <span class="card-label project">Project</span>
+  Liquid 4 as shipped by GitHub Pages has no `remove_last` filter, so the
+  trailing slash is removed with a sentinel: append a marker that cannot
+  occur in a URL, delete the marker together with the slash in front of it
+  if that pair exists, then delete any marker that survived (meaning the
+  URL had no trailing slash to begin with).
 
-  <!-- Optional deployment/build status indicator -->
-  {% if include.status %}
-  <div class="status">{{ include.status }}</div>
+  The previous version of this file used `remove: '/'`, which deleted
+  EVERY slash in the URL rather than the trailing one, turning
+  "keglev.github.io/inventory-service/" into
+  "keglev.github.ioinventory-service".
+{% endcomment %}
+{%- assign demo_text = include.demo_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
+{%- assign docs_text = include.docs_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
+{%- assign repo_text = include.repo_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
+{%- assign repo2_text = include.repo2_url | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
+
+<div class="card {{ include.extra_class }}">
+
+  <!-- Card type pill: Project, AI - RAG, Portfolio -->
+  <span class="card-label {{ label_class }}">{{ t[include.label_key] }}</span>
+
+  {% if include.status_key %}
+  <!-- Deployment / build status, prefixed with a green dot by CSS -->
+  <div class="status">{{ t[include.status_key] }}</div>
   {% endif %}
 
-  <!-- Project title -->
-  <h3>{{ include.title }}</h3>
+  <h3>{{ t[include.title_key] }}</h3>
 
-  <!-- Short description -->
-  <p>{{ include.description }}</p>
+  <p>{{ t[include.desc_key] }}</p>
 
-  <!-- Key-value rows: Docs, Repository, optional second repository -->
+  <!-- Key-value rows: live demo, docs, then repositories -->
   <div class="kv">
 
+    {% if include.demo_url %}
+    <span class="kv-label">{{ t['card.kv.demo'] }}</span>
+    <span><a href="{{ include.demo_url }}" target="_blank" rel="noopener">{{ demo_text }}</a></span>
+    {% endif %}
+
     {% if include.docs_url %}
-    <span class="kv-label">Docs</span>
-    <span>
-      <a href="{{ include.docs_url }}" target="_blank">
-        {{ include.docs_url | remove: 'https://' | remove: 'http://' | remove: '/' }}
-      </a>
-    </span>
+    <span class="kv-label">{{ t['card.kv.docs'] }}</span>
+    <span><a href="{{ include.docs_url }}" target="_blank" rel="noopener">{{ docs_text }}</a></span>
     {% endif %}
 
     {% if include.repo_url and include.repo2_url %}
-    <!-- Two repositories: label becomes plural -->
-    <span class="kv-label">Repositories</span>
+    <!-- Two repositories: the label becomes plural and both links stack -->
+    <span class="kv-label">{{ t['card.kv.repos'] }}</span>
     <span class="kv-multi">
-      <a href="{{ include.repo_url }}" target="_blank">
-        {{ include.repo_url | remove: 'https://' }}
-      </a>
-      <a href="{{ include.repo2_url }}" target="_blank">
-        {{ include.repo2_url | remove: 'https://' }}
-      </a>
+      <a href="{{ include.repo_url }}" target="_blank" rel="noopener">{{ repo_text }}</a>
+      <a href="{{ include.repo2_url }}" target="_blank" rel="noopener">{{ repo2_text }}</a>
     </span>
     {% elsif include.repo_url %}
-    <!-- Single repository -->
-    <span class="kv-label">Repository</span>
-    <span>
-      <a href="{{ include.repo_url }}" target="_blank">
-        {{ include.repo_url | remove: 'https://' }}
-      </a>
-    </span>
+    <span class="kv-label">{{ t['card.kv.repo'] }}</span>
+    <span><a href="{{ include.repo_url }}" target="_blank" rel="noopener">{{ repo_text }}</a></span>
     {% endif %}
 
   </div>
 
-  <!-- Technology badges (comma-separated string split into individual pills) -->
   {% if include.badges %}
+  <!-- Technology badges. These are product names and stay untranslated. -->
   <div class="badges">
-    {% assign badge_list = include.badges | split: ',' %}
+    {%- assign badge_list = include.badges | split: ',' -%}
     {% for badge in badge_list %}
     <span class="badge">{{ badge | strip }}</span>
     {% endfor %}

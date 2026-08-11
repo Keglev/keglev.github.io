@@ -1,0 +1,83 @@
+{% comment %}
+  _includes/page_body.html
+  ========================
+  The entire visible body of the documentation hub landing page.
+
+  Both index.md (English) and de/index.md (German) include this file and
+  nothing else. There is exactly ONE copy of the page structure; the two
+  entry files differ only in their front matter (`lang`, `permalink`).
+  Adding a project therefore means editing one file, not two, and the
+  German page can never silently drift out of sync with the English one.
+
+  All text comes from _data/i18n.yml via the `t` lookup below.
+  Technology badge names are product names and stay untranslated.
+{% endcomment %}
+{%- assign t = site.data.i18n[page.lang] -%}
+
+<div class="hero">
+  <h1>{{ t['hero.title'] }}</h1>
+  <p>{{ t['hero.subtitle'] }}</p>
+  <div class="hero-links">
+    <a class="hero-link" href="https://carloskeglevich.vercel.app/" target="_blank" rel="noopener">{{ t['hero.link.portfolio'] }}</a>
+    <a class="hero-link" href="https://github.com/Keglev" target="_blank" rel="noopener">{{ t['hero.link.github'] }}</a>
+    <a class="hero-link" href="https://www.linkedin.com/in/carloskeglevich" target="_blank" rel="noopener">{{ t['hero.link.linkedin'] }}</a>
+  </div>
+</div>
+
+<div class="section-label">{{ t['section.projects'] }}</div>
+
+<div class="grid">
+
+  {%- include project_card.html
+      label_key="card.label.project"
+      status_key="ssp.status"
+      title_key="ssp.title"
+      desc_key="ssp.desc"
+      docs_url="https://keglev.github.io/inventory-service/"
+      repo_url="https://github.com/Keglev/inventory-service"
+      badges="Java 21, Spring Boot 3, Oracle Autonomous DB, React, TypeScript, Docker, OAuth2/JWT, CI/CD, JaCoCo >85%, REDOC"
+  -%}
+
+  {%- include project_card.html
+      label_key="card.label.project"
+      status_key="se.status"
+      title_key="se.title"
+      desc_key="se.desc"
+      docs_url="https://keglev.github.io/stockease/"
+      repo_url="https://github.com/Keglev/stockease"
+      repo2_url="https://github.com/Keglev/frontend"
+      badges="Java 17, Spring Boot 3, PostgreSQL, React, TypeScript, OAuth2, CRUD"
+  -%}
+
+  {%- include project_card.html
+      label_key="card.label.project"
+      title_key="rs.title"
+      desc_key="rs.desc"
+      docs_url="https://keglev.github.io/restaurant-speisekarte/"
+      repo_url="https://github.com/Keglev/restaurant-speisekarte"
+      badges="React, JavaScript, Vite, Static Hosting"
+  -%}
+
+</div>
+
+<div class="standards">
+  <h2>{{ t['standards.title'] }}</h2>
+  <ul>
+    <li>{{ t['standards.item1_html'] }}</li>
+    <li>{{ t['standards.item2_html'] }}</li>
+    <li>{{ t['standards.item3_html'] }}</li>
+  </ul>
+</div>
+
+<div class="about-strip">
+  <div class="about-left">
+    <span class="card-label portfolio">{{ t['card.label.portfolio'] }}</span>
+    <span class="about-name">{{ t['about.name'] }}</span>
+    <span class="about-desc">{{ t['about.role'] }}</span>
+  </div>
+  <div class="about-links">
+    <a href="https://carloskeglevich.vercel.app/" target="_blank" rel="noopener">{{ t['about.link.portfolio'] }}</a>
+    <a href="https://keglev.github.io/my-portfolio/" target="_blank" rel="noopener">{{ t['about.link.docs'] }}</a>
+    <a href="https://github.com/Keglev/my-portfolio" target="_blank" rel="noopener">{{ t['about.link.repo'] }}</a>
+  </div>
+</div>
