@@ -81,7 +81,7 @@ en:
   # ---- Project: StockEase -----------------------------------------------
   se.status: "Production-ready · Deployed on Fly.io"
   se.title: "StockEase — Inventory Management"
-  se.desc: "Full-stack inventory system for small businesses. Capital value visualisation and Excel BI export without the cost of an ERP suite. Split into a backend API and a separate React front end repository."
+  se.desc: "Full-stack inventory system for small businesses. Capital value visualisation and Excel BI export without the cost of an ERP suite. Angular front end against a documented Spring Boot API."
 
   # ---- Standards block ---------------------------------------------------
   standards.title: "Standards & conventions"
@@ -142,7 +142,7 @@ de:
   # ---- Projekt: StockEase -----------------------------------------------
   se.status: "Produktionsreif · Bereitgestellt auf Fly.io"
   se.title: "StockEase — Lagerverwaltung"
-  se.desc: "Full-Stack-Lagerverwaltung für kleine Betriebe. Visualisierung des gebundenen Kapitals und Excel-Export für Auswertungen, ohne die Kosten einer ERP-Suite. Aufgeteilt in ein Backend-API- und ein separates React-Frontend-Repository."
+  se.desc: "Full-Stack-Lagerverwaltung für kleine Betriebe. Visualisierung des gebundenen Kapitals und Excel-Export für Auswertungen, ohne die Kosten einer ERP-Suite. Angular-Oberfläche auf einer dokumentierten Spring-Boot-API."
 
   # ---- Standards ---------------------------------------------------------
   standards.title: "Standards und Konventionen"
