@@ -84,6 +84,11 @@
             --radius:             12px;    /* Standard border radius        */
             --radius-sm:          8px;     /* Controls and small surfaces   */
 
+            /* Maximum content width, shared by .wrapper and the header nav so
+               the two stay aligned. See .wrapper (section 4) for why this is
+               capped rather than fluid all the way up. */
+            --content-width:      1320px;
+
             /* Tells the browser to render form controls and scrollbars in
                their dark variant, so native UI matches the page. */
             color-scheme: dark;
@@ -172,7 +177,24 @@
            own max-width internally to stay aligned with the wrapper.
            ============================================================ */
         .wrapper {
-            max-width: 860px;
+            /* 860px was sized for a single column of prose. This page is a
+               two-column card grid, so on a laptop or an external monitor it
+               left roughly a third of the viewport empty on each side while
+               the cards themselves ran unnecessarily tall.
+
+               --content-width is the single knob (see section 1). At 1320px
+               each card is about 628px wide, which puts a card description at
+               roughly 69 characters per line — the top of the 45-75 range that
+               reads comfortably. Wider would fill more of a large monitor but
+               push the measure past the point where the eye loses its place
+               returning to the left margin, so the value is capped rather than
+               tied to the viewport. A 27-inch monitor keeps visible margins by
+               design; the aim is to stop wasting a third of a laptop screen,
+               not to fill every pixel.
+
+               min() keeps it fluid below the cap: on a 1024px tablet the
+               wrapper is 94vw and the cards simply narrow. */
+            max-width: min(var(--content-width), 94vw);
             margin: 0 auto;
             padding: 0 24px 60px;
         }
@@ -191,7 +213,9 @@
             z-index: 100;
         }
         .site-header nav {
-            max-width: 860px; /* Matches .wrapper for visual alignment */
+            /* Must track .wrapper exactly, or the brand and the header
+               controls stop aligning with the content beneath them. */
+            max-width: min(var(--content-width), 94vw);
             margin: 0 auto;
             display: flex;
             align-items: center;
