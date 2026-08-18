@@ -1,4 +1,16 @@
-# Site Configuration
+# _config.yml
+# ===========
+# Jekyll configuration for the Project Documentation Hub.
+#
+# GitHub Pages reads this file server-side on every push to main. Keys that
+# name something the repository does not contain are not harmless: they are a
+# claim about the site that a reader will believe. Every key below corresponds
+# to something that exists.
+
+# ---- Site identity -------------------------------------------------------
+# `title` and `description` are the fallbacks jekyll-seo-tag uses when a page
+# declares none. Both index.md and de/index.md declare their own, translated,
+# so these are only ever seen by a page added without front matter.
 title: "Project Documentation Hub — Carlos Keglevich"
 description: "Technical documentation, demos, and references for my public projects"
 author: "Carlos Keglevich"
@@ -6,38 +18,28 @@ email: "carlos.keglevich@gmail.com"
 url: "https://keglev.github.io"
 baseurl: ""
 
-# Build settings
+# ---- Build ---------------------------------------------------------------
 markdown: kramdown
 highlighter: rouge
+
+# Plugins must also appear in the Gemfile, and must be on the GitHub Pages
+# allow-list to work on the deployed site rather than only locally.
+#
+# jekyll-feed is deliberately absent: it publishes an Atom feed of `_posts`,
+# and this repository has none, so it produced an empty feed.xml that
+# advertised a feed with nothing in it.
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# Theme (minimal built-in themes)
-theme: minima
-# Alternative: Use no theme and create custom layouts
-# theme: 
+# No `theme:` key. Every layout, include and stylesheet in this repository is
+# local, so a gem-based theme would contribute nothing while implying that
+# some of the markup comes from somewhere else.
 
-# Collections (for future project pages)
-collections:
-  projects:
-    output: true
-    permalink: /:collection/:name/
-
-# Exclude files from processing
+# ---- Exclusions ----------------------------------------------------------
+# Files that live in the repository but must not be copied into _site.
 exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-  - node_modules
   - vendor
-
-# SEO and social
-twitter:
-  username: # your twitter handle if you have one
-linkedin:
-  username: carlos-keglevich
-
-# GitHub Pages safe plugins only
-safe: true
