@@ -51,7 +51,7 @@ en:
 
   # ---- Hero --------------------------------------------------------------
   hero.title: "Project Documentation Hub"
-  hero.subtitle: "Technical documentation, live demos and API references for my public projects. Every project starts from a real business problem — maintenance, procurement and inventory — not from a tutorial."
+  hero.subtitle: "Technical documentation, live demos and API references for my public projects. Every project starts from a real business problem — maintenance, procurement and inventory — taken from work I did before I wrote software. Each one is deployed, documented and covered by tests."
   hero.link.portfolio: "Portfolio"
   hero.link.github: "GitHub"
   hero.link.linkedin: "LinkedIn"
@@ -112,7 +112,7 @@ de:
 
   # ---- Hero --------------------------------------------------------------
   hero.title: "Projekt-Dokumentation"
-  hero.subtitle: "Technische Dokumentation, Live-Demos und API-Referenzen zu meinen öffentlichen Projekten. Jedes Projekt geht von einem realen betrieblichen Problem aus — Instandhaltung, Einkauf und Lagerhaltung — nicht von einem Tutorial."
+  hero.subtitle: "Technische Dokumentation, Live-Demos und API-Referenzen zu meinen öffentlichen Projekten. Jedes Projekt geht von einem realen betrieblichen Problem aus — Instandhaltung, Einkauf und Lagerhaltung — aus Aufgaben, die ich vor meiner Zeit als Entwickler selbst bearbeitet habe. Jedes ist bereitgestellt, dokumentiert und durch Tests abgedeckt."
   hero.link.portfolio: "Portfolio"
   hero.link.github: "GitHub"
   hero.link.linkedin: "LinkedIn"

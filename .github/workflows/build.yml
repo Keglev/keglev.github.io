@@ -217,6 +217,22 @@ jobs:
             || { echo "an 860px cap survives"; exit 1; }
           echo "Domain and layout token verified."
 
+      - name: Verify the hero is centred and the subtitle no longer denies
+        run: |
+          ! grep -rq "not from a tutorial" _site/ \
+            || { echo "English subtitle still ends with the denial"; exit 1; }
+          ! grep -rq "nicht von einem Tutorial" _site/ \
+            || { echo "German subtitle still ends with the denial"; exit 1; }
+          grep -q "covered by tests" _site/index.html \
+            || { echo "new English subtitle missing"; exit 1; }
+          grep -q "durch Tests abgedeckt" _site/de/index.html \
+            || { echo "new German subtitle missing"; exit 1; }
+          grep -q "justify-content: center" _site/assets/css/main.css \
+            || { echo ".hero-links centring missing"; exit 1; }
+          grep -q "max-width: 68ch" _site/assets/css/main.css \
+            || { echo "the hero measure was dropped"; exit 1; }
+          echo "Hero centring and subtitle verified."
+
       # A key present in one language and missing in the other renders as an
       # empty string, silently. This is the only check that catches it.
       - name: Verify EN/DE catalogue parity

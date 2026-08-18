@@ -370,6 +370,11 @@
            Contains the page title, subtitle, and quick-access links.
            ============================================================ */
         .hero {
+            /* Centred as a block. The hero is the only centred region on the
+               page — everything below it is left-aligned card content — so the
+               centring reads as a deliberate title block rather than as a
+               stylistic choice applied at random. */
+            text-align: center;
             padding: 48px 0 32px;
             border-bottom: 1px solid var(--line);
             margin-bottom: 40px;
@@ -386,13 +391,19 @@
                measure stays constant if the base font changes. */
             font-size: 1.0625rem;
             color: var(--muted);
-            margin: 0 0 20px;
+            /* auto side margins centre the 68ch measure inside the wrapper.
+               Without them the paragraph keeps its measure but stays pinned
+               left, so the centred h1 above it would look misaligned. */
+            margin: 0 auto 20px;
             max-width: 68ch;
         }
         /* Row of pill-style navigation links (Portfolio, GitHub, LinkedIn) */
         .hero-links {
             display: flex;
             flex-wrap: wrap;
+            /* The row is a flex container, so text-align on the parent does
+               not reach it — the items need their own main-axis centring. */
+            justify-content: center;
             gap: 10px;
         }
         .hero-link {
