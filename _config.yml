@@ -43,3 +43,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  # scripts/ holds the verification script. Without this, Jekyll copies it
+  # into _site/ and publishes it at /scripts/verify-site.sh — and, because the
+  # script names the very strings it asserts are absent, its own comments trip
+  # its own removed-content check.
+  - scripts
