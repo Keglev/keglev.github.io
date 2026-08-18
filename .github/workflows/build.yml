@@ -199,6 +199,24 @@ jobs:
             || { echo "German page does not link back to the English one"; exit 1; }
           echo "German page is translated and links back to /."
 
+      - name: Verify the portfolio domain and the layout token
+        run: |
+          ! grep -rq "carloskeglevich.vercel.app" _site/ \
+            || { echo "old portfolio URL still present"; exit 1; }
+          for page in _site/index.html _site/de/index.html; do
+            grep -q 'href="https://carloskeglevich.de/"' "$page" \
+              || { echo "new portfolio URL missing in $page"; exit 1; }
+            grep -q 'linkedin.com/in/carloskeglevich' "$page" \
+              || { echo "LinkedIn URL was corrupted by a blind replace in $page"; exit 1; }
+          done
+          grep -q -- "--content-width" _site/assets/css/main.css \
+            || { echo "--content-width token missing"; exit 1; }
+          [ "$(grep -c 'max-width: min(var(--content-width), 94vw)' _site/assets/css/main.css)" -eq 2 ] \
+            || { echo ".wrapper and .site-header nav must both use --content-width"; exit 1; }
+          ! grep -q "max-width: 860px" _site/assets/css/main.css \
+            || { echo "an 860px cap survives"; exit 1; }
+          echo "Domain and layout token verified."
+
       # A key present in one language and missing in the other renders as an
       # empty string, silently. This is the only check that catches it.
       - name: Verify EN/DE catalogue parity
