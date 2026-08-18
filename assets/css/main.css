@@ -740,13 +740,20 @@
 
         /* ============================================================
           19. RESPONSIVE
-           Below 620px: collapse grid to single column, reduce hero
-           font size, and stack footer and about-strip vertically.
+           Below 900px the two-column grid stops earning its keep: each
+           card falls under ~400px and the descriptions tower. The grid
+           collapses to one column there rather than at 620px, so a
+           tablet in portrait gets full-width cards instead of two
+           cramped ones.
+           Below 620px: reduce hero size, stack footer and about-strip.
            ============================================================ */
-        @media (max-width: 620px) {
+        @media (max-width: 900px) {
             .grid { grid-template-columns: 1fr; }
-            /* One column already: centring would only narrow the card. */
+            /* One column already — centring would only narrow the card. */
             .card-centered { max-width: 100%; }
+        }
+
+        @media (max-width: 620px) {
             .hero { padding-top: 36px; }
             .hero h1 { font-size: 1.6rem; }
             .kv { grid-template-columns: 76px auto; }
