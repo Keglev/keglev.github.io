@@ -82,6 +82,38 @@ jobs:
       # The order of the cards is a content decision, not an accident:
       # the strongest project leads. Asserting it here means a reorder has
       # to be deliberate rather than a side effect of editing page_body.
+      - name: Verify every card links a live demo
+        run: |
+          for url in "https://maintenance.smartsupply.com.de" \
+                     "https://bestandskontrolle.vercel.app" \
+                     "https://www.smartsupplypro.de"; do
+            grep -q "href=\"$url\"" _site/index.html \
+              || { echo "missing demo link: $url"; exit 1; }
+            grep -q "href=\"$url\"" _site/de/index.html \
+              || { echo "missing demo link on German page: $url"; exit 1; }
+          done
+          # The archived React frontend must never be linked: it still serves
+          # the unedited Vite starter title.
+          ! grep -rq "stockeasefrontend" _site/ \
+            || { echo "archived React frontend is linked"; exit 1; }
+          # Stale stack claims that were corrected in this change.
+          ! grep -rq "Spring Boot 3" _site/ \
+            || { echo "stale Spring Boot 3 reference"; exit 1; }
+
+          # Three demo ROWS per page. Matched on the kv-label element rather
+          # than on the words "Live demo", because the Maintenance Assistant
+          # status line also begins with them and would inflate the count.
+          en_rows=$(grep -o 'class="kv-label">Live demo<' _site/index.html | wc -l)
+          de_rows=$(grep -o 'class="kv-label">Live-Demo<' _site/de/index.html | wc -l)
+          [ "$en_rows" -eq 3 ] || { echo "EN page has $en_rows demo rows, expected 3"; exit 1; }
+          [ "$de_rows" -eq 3 ] || { echo "DE page has $de_rows demo rows, expected 3"; exit 1; }
+
+          # Demo link text drops the scheme and any trailing slash.
+          grep -q '>www.smartsupplypro.de<' _site/index.html \
+            || { echo "demo link text is malformed"; exit 1; }
+
+          echo "All three cards link a live demo."
+
       - name: Verify card order
         run: |
           # Match only the leading ASCII word of each title. The titles
