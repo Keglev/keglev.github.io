@@ -41,9 +41,6 @@
     demo_url     (optional) URL of a running deployment. Rendered first.
     docs_url     (optional) URL of the generated documentation.
     repo_url     (optional) Primary repository URL.
-    repo2_url    (optional) Secondary repository URL (e.g. a split front
-                            end). Its presence switches the label to the
-                            plural key and stacks both links.
     badges       (optional) Comma-separated technology list. Product names,
                             deliberately NOT translated.
     label_class  (optional) Variant class for the type pill: `project`
@@ -76,7 +73,6 @@
 {%- assign demo_text = include.demo_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
 {%- assign docs_text = include.docs_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
 {%- assign repo_text = include.repo_url  | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
-{%- assign repo2_text = include.repo2_url | remove: 'https://' | remove: 'http://' | append: 'ZZ' | replace: '/ZZ', '' | replace: 'ZZ', '' -%}
 
 <div class="card {{ include.extra_class }}">
 
@@ -92,7 +88,7 @@
 
   <p>{{ t[include.desc_key] }}</p>
 
-  <!-- Key-value rows: live demo, docs, then repositories -->
+  <!-- Key-value rows: live demo, docs, then the repository -->
   <div class="kv">
 
     {% if include.demo_url %}
@@ -105,14 +101,7 @@
     <span><a href="{{ include.docs_url }}" target="_blank" rel="noopener">{{ docs_text }}</a></span>
     {% endif %}
 
-    {% if include.repo_url and include.repo2_url %}
-    <!-- Two repositories: the label becomes plural and both links stack -->
-    <span class="kv-label">{{ t['card.kv.repos'] }}</span>
-    <span class="kv-multi">
-      <a href="{{ include.repo_url }}" target="_blank" rel="noopener">{{ repo_text }}</a>
-      <a href="{{ include.repo2_url }}" target="_blank" rel="noopener">{{ repo2_text }}</a>
-    </span>
-    {% elsif include.repo_url %}
+    {% if include.repo_url %}
     <span class="kv-label">{{ t['card.kv.repo'] }}</span>
     <span><a href="{{ include.repo_url }}" target="_blank" rel="noopener">{{ repo_text }}</a></span>
     {% endif %}

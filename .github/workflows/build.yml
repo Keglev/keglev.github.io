@@ -233,6 +233,24 @@ jobs:
             || { echo "the hero measure was dropped"; exit 1; }
           echo "Hero centring and subtitle verified."
 
+      # Guards the removals in the "remove dead code and config" change.
+      # Both are invisible in the rendered page, so nothing else would notice
+      # if they came back: jekyll-feed re-listed in _config.yml starts
+      # publishing an empty feed again, and the second-repository markup
+      # would only show up as an extra row on a card nobody is looking at.
+      - name: Verify removed capabilities stay removed
+        run: |
+          ! test -f _site/feed.xml \
+            || { echo "feed.xml is back — jekyll-feed re-enabled?"; exit 1; }
+          ! grep -rq 'kv-multi' _site/ \
+            || { echo "the second-repository markup is back"; exit 1; }
+          for page in _site/index.html _site/de/index.html; do
+            rows=$(grep -c 'class="kv-label"' "$page")
+            [ "$rows" -eq 9 ] \
+              || { echo "$page has $rows kv rows, expected 9 (3 per card)"; exit 1; }
+          done
+          echo "feed.xml absent, kv-multi gone, 9 kv rows per page."
+
       # A key present in one language and missing in the other renders as an
       # empty string, silently. This is the only check that catches it.
       - name: Verify EN/DE catalogue parity

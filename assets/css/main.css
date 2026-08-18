@@ -33,13 +33,20 @@
    10. Project card           (.card, .card h3, .card p)
    11. Card type label        (.card-label, .project, .ai, .portfolio)
    12. Status pill            (.status)
-   13. Key-value rows         (.kv, .kv-label, .kv-multi)
+   13. Key-value rows         (.kv, .kv-label)
    14. Technology badges      (.badges, .badge)
    15. Standards block        (.standards)
    16. About strip            (.about-strip, .about-left, .about-links)
    17. Site footer            (.site-footer)
    18. Focus & motion         (:focus-visible, prefers-reduced-motion)
-   19. Responsive             (@media 620px, @media 420px)
+   19. Responsive             (@media 900px, @media 620px, @media 420px)
+
+  SIZE WAIVER — one file, ~470 code lines, reviewed 2026-08-18.
+  Above the 300-600 target but below the 800 alarm, and kept whole
+  deliberately: nothing here changes for two unrelated reasons, so any
+  split would be cut to balance line counts rather than to separate
+  concerns. The table of contents above is what makes the length
+  navigable. Revisit when a second page template exists.
 */
 
         /* ============================================================
@@ -63,7 +70,6 @@
             --muted:              #94a7c2; /* Secondary text (see note)     */
             --link:               #38bdf8; /* Links and interactive color   */
             --accent:             #0ea5e9; /* Primary accent (cyan)         */
-            --accent2:            #6366f1; /* Secondary accent (indigo)     */
             --badge-bg:           #1e3a52; /* Tech badge background         */
             --badge-fg:           #7dd3fc; /* Tech badge text               */
             --label-bg:           rgba(14, 165, 233, 0.10); /* Project pill bg     */
@@ -130,7 +136,6 @@
             --muted:              #51637d;
             --link:               #0369a1;
             --accent:             #0284c7;
-            --accent2:            #4f46e5;
             --badge-bg:           #eef4fb;
             --badge-fg:           #17527d;
             --label-bg:           #e8f4fd;
@@ -561,7 +566,6 @@
           13. KEY-VALUE ROWS
            Two-column grid inside a card for structured metadata:
            labels on the left (90px fixed), values on the right.
-           .kv-multi stacks multiple links vertically in one value cell.
            ============================================================ */
         .kv {
             display: grid;
@@ -585,12 +589,6 @@
             word-break: break-word;
         }
         .kv a:hover { text-decoration: underline; }
-        /* Used when a single label maps to multiple URLs (e.g. split repos) */
-        .kv-multi {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
 
         /* ============================================================
           14. TECHNOLOGY BADGES
@@ -611,11 +609,6 @@
             background: var(--badge-bg);
             color: var(--badge-fg);
             font-weight: 500;
-        }
-        /* Indigo variant used for portfolio-related badge entries */
-        .badge.portfolio-badge {
-            background: var(--portfolio-badge-bg);
-            color: var(--portfolio-badge-fg);
         }
 
         /* ============================================================

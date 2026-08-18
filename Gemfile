@@ -21,7 +21,6 @@ gem "github-pages", "~> 232", group: :jekyll_plugins
 # deployed site and not only locally. Keep this list in sync with the
 # `plugins:` key in _config.yml.
 group :jekyll_plugins do
-  gem "jekyll-feed"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
 end
