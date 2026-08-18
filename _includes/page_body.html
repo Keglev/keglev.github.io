@@ -37,6 +37,18 @@
     section 9). If the order changes, `card-centered` moves with whichever
     card ends up alone in the last row — it belongs to the position, not to
     the project.
+
+    DEMO LINKS. All three cards now carry `demo_url`, so a reviewer can open
+    a running application from any card without first reading a README. The
+    URL is the one the project actually ships to users, not an internal host:
+      - SmartSupplyPro -> www.smartsupplypro.de   (Koyeb frontend; the Fly.io
+        backend at inventoryservice.fly.dev redirects here, so listing it
+        separately would add a row without adding information)
+      - StockEase      -> bestandskontrolle.vercel.app  (the Angular build;
+        the archived React frontend at stockeasefrontend.vercel.app is
+        deliberately NOT linked — it still serves the unedited Vite starter
+        title "Vite + React + TS", so linking it from a documentation hub
+        would work against the project)
   {%- endcomment -%}
   {%- include project_card.html
       label_key="card.label.ai"
@@ -55,6 +67,7 @@
       status_key="se.status"
       title_key="se.title"
       desc_key="se.desc"
+      demo_url="https://bestandskontrolle.vercel.app"
       docs_url="https://keglev.github.io/stockease/"
       repo_url="https://github.com/Keglev/stockease"
       badges="Java 21, Spring Boot 4.x, Spring Modulith, PostgreSQL (Supabase), Flyway, Angular, TypeScript, JWT, Testcontainers, JaCoCo, Koyeb"
@@ -65,6 +78,7 @@
       status_key="ssp.status"
       title_key="ssp.title"
       desc_key="ssp.desc"
+      demo_url="https://www.smartsupplypro.de"
       docs_url="https://keglev.github.io/inventory-service/"
       repo_url="https://github.com/Keglev/inventory-service"
       badges="Java 21, Spring Boot 4.1, Oracle Autonomous DB, Flyway, React 19, TypeScript, Vite, OAuth2 / OIDC, JUnit 6, JaCoCo, ReDoc, Fly.io + Koyeb"
