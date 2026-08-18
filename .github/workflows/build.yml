@@ -142,14 +142,15 @@ jobs:
 
       # Badges are produced by splitting the `badges` string on commas, so
       # this count is also what catches a comma INSIDE a badge name silently
-      # becoming two badges. See the note in the pull request about
-      # "Llama 3.3 70B (IONOS, EU)".
+      # becoming two badges — which is exactly how "Llama 3.3 70B (IONOS, EU)"
+      # rendered as "Llama 3.3 70B (IONOS" and "EU)" before it was written
+      # with a middot. See the note in _includes/project_card.html.
       - name: Verify badge counts per card
         run: |
           for page in _site/index.html _site/de/index.html; do
             counts=$(awk '/<div class="card/{c++} /class="badge"/{n[c]++} END{printf "%d,%d,%d", n[1], n[2], n[3]}' "$page")
             echo "$page -> $counts"
-            [ "$counts" = "14,13,12" ] \
+            [ "$counts" = "13,13,12" ] \
               || { echo "unexpected badge counts in $page"; exit 1; }
           done
           echo "Badge counts are 14, 13, 12 in grid order."
