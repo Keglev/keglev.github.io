@@ -65,7 +65,6 @@ en:
   card.label.portfolio: "Portfolio"
   card.kv.docs: "Docs"
   card.kv.repo: "Repository"
-  card.kv.repos: "Repositories"
   card.kv.demo: "Live demo"
 
   # ---- Project: SmartSupplyPro ------------------------------------------
@@ -126,7 +125,6 @@ de:
   card.label.portfolio: "Portfolio"
   card.kv.docs: "Doku"
   card.kv.repo: "Repository"
-  card.kv.repos: "Repositories"
   card.kv.demo: "Live-Demo"
 
   # ---- Projekt: SmartSupplyPro ------------------------------------------

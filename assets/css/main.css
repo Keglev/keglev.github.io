@@ -33,7 +33,7 @@
    10. Project card           (.card, .card h3, .card p)
    11. Card type label        (.card-label, .project, .ai, .portfolio)
    12. Status pill            (.status)
-   13. Key-value rows         (.kv, .kv-label, .kv-multi)
+   13. Key-value rows         (.kv, .kv-label)
    14. Technology badges      (.badges, .badge)
    15. Standards block        (.standards)
    16. About strip            (.about-strip, .about-left, .about-links)
@@ -559,7 +559,6 @@
           13. KEY-VALUE ROWS
            Two-column grid inside a card for structured metadata:
            labels on the left (90px fixed), values on the right.
-           .kv-multi stacks multiple links vertically in one value cell.
            ============================================================ */
         .kv {
             display: grid;
@@ -583,12 +582,6 @@
             word-break: break-word;
         }
         .kv a:hover { text-decoration: underline; }
-        /* Used when a single label maps to multiple URLs (e.g. split repos) */
-        .kv-multi {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
 
         /* ============================================================
           14. TECHNOLOGY BADGES
