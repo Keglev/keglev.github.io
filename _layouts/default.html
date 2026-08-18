@@ -57,13 +57,6 @@
        language versions stay in sync.
 {% endcomment %}
 {%- assign t = site.data.i18n[page.lang] -%}
-{%- if page.lang == 'de' -%}
-  {%- assign alt_lang = 'en' -%}
-  {%- assign alt_url = '/' -%}
-{%- else -%}
-  {%- assign alt_lang = 'de' -%}
-  {%- assign alt_url = '/de/' -%}
-{%- endif -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang }}" data-theme="dark">
 <head>
