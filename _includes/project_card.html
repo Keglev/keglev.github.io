@@ -120,7 +120,16 @@
   </div>
 
   {% if include.badges %}
-  <!-- Technology badges. These are product names and stay untranslated. -->
+  <!--
+    Technology badges. These are product names and stay untranslated.
+
+    `badges` is a COMMA-SEPARATED string, so a badge name must never contain
+    a comma of its own — use a middot instead, as in
+    "Llama 3.3 70B (IONOS · EU)". A comma inside a name does not error: the
+    split silently produces two badges, here "Llama 3.3 70B (IONOS" and
+    "EU)", and the only symptom is the rendered page. The badge count
+    assertion in .github/workflows/build.yml exists to catch it.
+  -->
   <div class="badges">
     {%- assign badge_list = include.badges | split: ',' -%}
     {% for badge in badge_list %}

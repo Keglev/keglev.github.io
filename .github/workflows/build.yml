@@ -121,9 +121,39 @@ jobs:
           # multibyte sequence and produces an unstable comparison string.
           order=$(grep -o '<h3>[A-Za-z]*' _site/index.html | sed 's|<h3>||' | paste -sd'|')
           echo "order: $order"
-          [ "$order" = "Maintenance|StockEase|SmartSupplyPro" ] \
+          # "AI" is the leading word of "AI Maintenance Assistant".
+          [ "$order" = "AI|StockEase|SmartSupplyPro" ] \
             || { echo "unexpected card order"; exit 1; }
           echo "Card order is correct."
+
+      - name: Verify the AI Maintenance Assistant card leads in both languages
+        run: |
+          head -1 <(grep -o "<h3>[^<]*</h3>" _site/index.html) \
+            | grep -q "AI Maintenance Assistant" \
+            || { echo "English page does not lead with the AI Maintenance Assistant"; exit 1; }
+          head -1 <(grep -o "<h3>[^<]*</h3>" _site/de/index.html) \
+            | grep -q "KI-Wartungsassistent" \
+            || { echo "German page does not lead with the KI-Wartungsassistent"; exit 1; }
+          ! grep -rq "API layer expanding" _site/ \
+            || { echo "superseded StockEase status still present"; exit 1; }
+          ! grep -rq "API-Schicht im Ausbau" _site/ \
+            || { echo "superseded German StockEase status still present"; exit 1; }
+          echo "Card titles and StockEase status are current."
+
+      # Badges are produced by splitting the `badges` string on commas, so
+      # this count is also what catches a comma INSIDE a badge name silently
+      # becoming two badges — which is exactly how "Llama 3.3 70B (IONOS, EU)"
+      # rendered as "Llama 3.3 70B (IONOS" and "EU)" before it was written
+      # with a middot. See the note in _includes/project_card.html.
+      - name: Verify badge counts per card
+        run: |
+          for page in _site/index.html _site/de/index.html; do
+            counts=$(awk '/<div class="card/{c++} /class="badge"/{n[c]++} END{printf "%d,%d,%d", n[1], n[2], n[3]}' "$page")
+            echo "$page -> $counts"
+            [ "$counts" = "13,13,12" ] \
+              || { echo "unexpected badge counts in $page"; exit 1; }
+          done
+          echo "Badge counts are 13, 13, 12 in grid order."
 
       - name: Verify StockEase has exactly one repository link
         run: |
