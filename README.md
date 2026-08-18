@@ -77,14 +77,18 @@ one language and silently breaks the bilingual model.
 
    ```yaml
    en:
-     myproj.status: "Production-ready · Deployed on Fly.io"
+     myproj.status: "Live · What a visitor can do without an account"
      myproj.title: "My Project — What It Does"
      myproj.desc: "One or two sentences about the business problem it solves."
    de:
-     myproj.status: "Produktionsreif · Bereitgestellt auf Fly.io"
+     myproj.status: "Live · Was ohne Konto möglich ist"
      myproj.title: "Mein Projekt — was es leistet"
      myproj.desc: "Ein bis zwei Sätze zum betrieblichen Problem, das es löst."
    ```
+
+   Write the status from the project's current README, not from memory. Two
+   earlier cards claimed a deployment target the projects had already moved
+   away from, and both survived several edits before anyone checked.
 
 2. Add a card to the `.grid` in `_includes/page_body.html`:
 
@@ -94,18 +98,33 @@ one language and silently breaks the bilingual model.
        status_key="myproj.status"
        title_key="myproj.title"
        desc_key="myproj.desc"
+       demo_url="https://my-project.example.com"
        docs_url="https://keglev.github.io/my-project/"
        repo_url="https://github.com/Keglev/my-project"
-       badges="Java 21, Spring Boot 3, PostgreSQL"
+       badges="Java 21, Spring Boot 4.1, PostgreSQL 17"
    -%}
    ```
 
    Technology badges are product names and are deliberately not translated, so
    they are passed inline rather than through the catalogue.
 
+   `badges` is split on commas, so **a badge name must never contain a comma of
+   its own** — use a middot instead, as in `Llama 3.3 70B (IONOS · EU)`. A comma
+   inside a name silently becomes two badges, and the per-card badge count in CI
+   is what catches it.
+
+   Note the version numbers above are current, not illustrative. CI fails the
+   build on the string `Spring Boot 3`, which an earlier version of this example
+   used — copying a stale example turned the build red.
+
 3. If the new count leaves one card alone in the final row of the two-column
    grid, move `extra_class="card-centered"` onto that card — and only that one.
    See `_includes/project_card.html` for the full parameter list.
+
+4. Update the assertions in `scripts/verify-site.sh` that carry a count: the
+   per-card badge counts and the expected card order both change when a card
+   is added, and CI will fail until they do. That failure is the mechanism
+   working — it forces a card addition to be deliberate.
 
 ## Theming
 
