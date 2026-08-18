@@ -69,9 +69,9 @@ en:
   card.kv.demo: "Live demo"
 
   # ---- Project: SmartSupplyPro ------------------------------------------
-  ssp.status: "Production-ready · Deployed on Fly.io"
+  ssp.status: "Live · Demo mode requires no account"
   ssp.title: "SmartSupplyPro — Procurement & Supplier Management"
-  ssp.desc: "Enterprise-grade API for purchasing and supplier evaluation. 36 endpoints, weighted-average-cost inventory valuation, price trend analysis and automatic shortage alerts — replacing manual Excel workflows. OAuth2/JWT security, CI/CD pipeline, test coverage above 85 percent (JaCoCo), full REDOC API reference."
+  ssp.desc: "Enterprise-grade system for purchasing and supplier evaluation. 36 endpoints, weighted-average-cost stock valuation, price trend analysis and automatic shortage alerts — replacing manual Excel workflows. Google OAuth2 with server-side sessions, an Oracle schema owned by Flyway that Hibernate may validate but never alter, and 2,221 tests across both stacks with coverage published from CI. The live demo opens read-only without an account."
 
   # ---- Project: Maintenance Assistant -----------------------------------
   ma.status: "Live demo · Hetzner CX33 (EU) · CI/CD on merge"
@@ -79,9 +79,9 @@ en:
   ma.desc: "A machine stops at 02:00 and the fix is buried in a PDF two halls away. Operators ask in plain German or English and get an answer built only from that plant's own maintenance protocols. Grounded answers cite every protocol they used; when nothing matches, the system labels the answer as general knowledge instead of inventing a source. Role-based filtering is enforced server-side, retrieval works across languages without a translation step, and all inference stays inside the EU."
 
   # ---- Project: StockEase -----------------------------------------------
-  se.status: "Production-ready · Deployed on Fly.io"
+  se.status: "Live · Backend production-ready, API layer expanding"
   se.title: "StockEase — Inventory Management"
-  se.desc: "Full-stack inventory system for small businesses. Capital value visualisation and Excel BI export without the cost of an ERP suite. Angular front end against a documented Spring Boot API."
+  se.desc: "Inventory system for small manufacturers, shipping to users as Bestandskontrolle. A modular monolith built with Spring Modulith: eight modules whose boundaries are enforced by tests rather than convention, stock booking driven by application events so that closing an invoice books the movement in the same transaction, and immutable business documents corrected through returns instead of edits. Tested against real PostgreSQL with Testcontainers."
 
   # ---- Standards block ---------------------------------------------------
   standards.title: "Standards & conventions"
@@ -130,9 +130,9 @@ de:
   card.kv.demo: "Live-Demo"
 
   # ---- Projekt: SmartSupplyPro ------------------------------------------
-  ssp.status: "Produktionsreif · Bereitgestellt auf Fly.io"
+  ssp.status: "Live · Demo-Modus ohne Anmeldung"
   ssp.title: "SmartSupplyPro — Einkauf und Lieferantenmanagement"
-  ssp.desc: "API auf Unternehmensniveau für Einkauf und Lieferantenbewertung. 36 Endpunkte, Bestandsbewertung nach gleitendem Durchschnittspreis, Preistrendanalyse und automatische Warnmeldungen bei Unterdeckung — als Ersatz für manuelle Excel-Prozesse. Absicherung über OAuth2/JWT, CI/CD-Pipeline, Testabdeckung über 85 Prozent (JaCoCo), vollständige API-Referenz mit REDOC."
+  ssp.desc: "System auf Unternehmensniveau für Einkauf und Lieferantenbewertung. 36 Endpunkte, Bestandsbewertung nach gleitendem Durchschnittspreis, Preistrendanalyse und automatische Warnmeldungen bei Unterdeckung — als Ersatz für manuelle Excel-Prozesse. Google-OAuth2 mit serverseitigen Sessions, ein von Flyway verwaltetes Oracle-Schema, das Hibernate prüfen, aber nie ändern darf, sowie 2.221 Tests über beide Stacks mit aus der CI veröffentlichter Testabdeckung. Die Live-Demo öffnet ohne Konto im Lesemodus."
 
   # ---- Projekt: Wartungsassistent ---------------------------------------
   ma.status: "Live-Demo · Hetzner CX33 (EU) · CI/CD bei jedem Merge"
@@ -140,9 +140,9 @@ de:
   ma.desc: "Um 02:00 Uhr steht eine Maschine still, und die Lösung liegt in einem PDF zwei Hallen weiter. Mitarbeitende fragen auf Deutsch oder Englisch und erhalten eine Antwort, die ausschließlich aus den Wartungsprotokollen des eigenen Werks aufgebaut ist. Belegte Antworten zitieren jedes verwendete Protokoll; findet sich kein passendes Dokument, kennzeichnet das System die Antwort als allgemeines Fachwissen, statt eine Quelle zu erfinden. Die Rollenfilterung erfolgt serverseitig, die Suche funktioniert sprachübergreifend ohne Übersetzungsschritt, und die gesamte Verarbeitung bleibt in der EU."
 
   # ---- Projekt: StockEase -----------------------------------------------
-  se.status: "Produktionsreif · Bereitgestellt auf Fly.io"
+  se.status: "Live · Backend produktionsreif, API-Schicht im Ausbau"
   se.title: "StockEase — Lagerverwaltung"
-  se.desc: "Full-Stack-Lagerverwaltung für kleine Betriebe. Visualisierung des gebundenen Kapitals und Excel-Export für Auswertungen, ohne die Kosten einer ERP-Suite. Angular-Oberfläche auf einer dokumentierten Spring-Boot-API."
+  se.desc: "Lagerverwaltung für kleine Fertigungsbetriebe, die den Anwendern als Bestandskontrolle ausgeliefert wird. Ein modularer Monolith auf Basis von Spring Modulith: acht Module, deren Grenzen durch Tests statt durch Konvention durchgesetzt werden, ereignisgesteuerte Bestandsbuchung, bei der das Schließen einer Rechnung die Buchung in derselben Transaktion auslöst, sowie unveränderliche Geschäftsdokumente, die über Retouren statt über Änderungen korrigiert werden. Getestet gegen echtes PostgreSQL mit Testcontainers."
 
   # ---- Standards ---------------------------------------------------------
   standards.title: "Standards und Konventionen"
