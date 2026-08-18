@@ -63,7 +63,6 @@
             --muted:              #94a7c2; /* Secondary text (see note)     */
             --link:               #38bdf8; /* Links and interactive color   */
             --accent:             #0ea5e9; /* Primary accent (cyan)         */
-            --accent2:            #6366f1; /* Secondary accent (indigo)     */
             --badge-bg:           #1e3a52; /* Tech badge background         */
             --badge-fg:           #7dd3fc; /* Tech badge text               */
             --label-bg:           rgba(14, 165, 233, 0.10); /* Project pill bg     */
@@ -130,7 +129,6 @@
             --muted:              #51637d;
             --link:               #0369a1;
             --accent:             #0284c7;
-            --accent2:            #4f46e5;
             --badge-bg:           #eef4fb;
             --badge-fg:           #17527d;
             --label-bg:           #e8f4fd;
@@ -611,11 +609,6 @@
             background: var(--badge-bg);
             color: var(--badge-fg);
             font-weight: 500;
-        }
-        /* Indigo variant used for portfolio-related badge entries */
-        .badge.portfolio-badge {
-            background: var(--portfolio-badge-bg);
-            color: var(--portfolio-badge-fg);
         }
 
         /* ============================================================
