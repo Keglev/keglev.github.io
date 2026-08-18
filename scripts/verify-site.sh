@@ -204,6 +204,42 @@ check_layout_invariants() {
     pass "content width, hero centring and the single centred card hold"
 }
 
+
+# ---------------------------------------------------------------------------
+# Capabilities that were removed from the repository, not merely from a page.
+# Neither is visible in the rendered output, so nothing else would notice if
+# they came back: re-listing jekyll-feed in _config.yml quietly starts
+# publishing an empty feed again, and the second-repository markup would only
+# surface as an extra row on a card nobody is looking at.
+# ---------------------------------------------------------------------------
+check_removed_capabilities() {
+    echo "Removed capabilities"
+    [ ! -f "${SITE}/feed.xml" ] || fail "feed.xml is back — jekyll-feed re-enabled?"
+    ! grep -rq 'kv-multi' "$SITE" || fail "the second-repository markup is back"
+    pass "no removed capability has returned"
+}
+
+# ---------------------------------------------------------------------------
+# The key-value rows on each card: three per card, nine per page. StockEase is
+# pinned to a single repository link because it once carried two, and the
+# Maintenance Assistant's docs and repository URLs share a slug that no other
+# assertion covers.
+#
+# Repository hrefs are counted rather than bare URLs: every repository URL
+# appears twice by design, once as the link target and once as the link text.
+# ---------------------------------------------------------------------------
+check_kv_rows() {
+    echo "Key-value rows"
+    local page rows repos
+    for page in "$EN" "$DE"; do
+        rows=$(grep -c 'class="kv-label"' "$page" || true)
+        [ "$rows" -eq 9 ] || fail "${page} has ${rows} kv rows, expected 9 (3 per card)"
+    done
+    repos=$(grep -c 'href="https://github.com/Keglev/stockease"' "$EN" || true)
+    [ "$repos" -eq 1 ] || fail "StockEase has ${repos} repository links, expected 1"
+    grep -q 'maintenance-assistant' "$EN" || fail "the Maintenance Assistant docs and repository links are missing"
+    pass "nine kv rows per page, one repository link per card"
+}
 # ---------------------------------------------------------------------------
 # The German page is translated, not an English copy served under /de/.
 # ---------------------------------------------------------------------------
@@ -249,6 +285,8 @@ main() {
     check_link_text
     check_badge_counts
     check_layout_invariants
+    check_removed_capabilities
+    check_kv_rows
     check_german_is_german
     check_catalogue_parity
     echo
