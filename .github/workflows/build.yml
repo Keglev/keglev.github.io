@@ -153,7 +153,7 @@ jobs:
             [ "$counts" = "13,13,12" ] \
               || { echo "unexpected badge counts in $page"; exit 1; }
           done
-          echo "Badge counts are 14, 13, 12 in grid order."
+          echo "Badge counts are 13, 13, 12 in grid order."
 
       - name: Verify StockEase has exactly one repository link
         run: |
