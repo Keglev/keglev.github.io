@@ -75,7 +75,7 @@ en:
 
   # ---- Project: Maintenance Assistant -----------------------------------
   ma.status: "Live demo · Hetzner CX33 (EU) · CI/CD on merge"
-  ma.title: "Maintenance Assistant — Retrieval-Augmented Answers for the Shop Floor"
+  ma.title: "AI Maintenance Assistant — Retrieval-Augmented Answers for the Shop Floor"
   ma.desc: "A machine stops at 02:00 and the fix is buried in a PDF two halls away. Operators ask in plain German or English and get an answer built only from that plant's own maintenance protocols. Grounded answers cite every protocol they used; when nothing matches, the system labels the answer as general knowledge instead of inventing a source. Role-based filtering is enforced server-side, retrieval works across languages without a translation step, and all inference stays inside the EU."
 
   # ---- Project: StockEase -----------------------------------------------
@@ -136,7 +136,7 @@ de:
 
   # ---- Projekt: Wartungsassistent ---------------------------------------
   ma.status: "Live-Demo · Hetzner CX33 (EU) · CI/CD bei jedem Merge"
-  ma.title: "Wartungsassistent — belegte KI-Antworten für die Produktion"
+  ma.title: "KI-Wartungsassistent — belegte Antworten für die Produktion"
   ma.desc: "Um 02:00 Uhr steht eine Maschine still, und die Lösung liegt in einem PDF zwei Hallen weiter. Mitarbeitende fragen auf Deutsch oder Englisch und erhalten eine Antwort, die ausschließlich aus den Wartungsprotokollen des eigenen Werks aufgebaut ist. Belegte Antworten zitieren jedes verwendete Protokoll; findet sich kein passendes Dokument, kennzeichnet das System die Antwort als allgemeines Fachwissen, statt eine Quelle zu erfinden. Die Rollenfilterung erfolgt serverseitig, die Suche funktioniert sprachübergreifend ohne Übersetzungsschritt, und die gesamte Verarbeitung bleibt in der EU."
 
   # ---- Projekt: StockEase -----------------------------------------------
