@@ -1,6 +1,7 @@
 # .github/workflows/build.yml
 # ===========================
-# Builds the site on every pull request and on every push to main.
+# Builds the site and verifies the result, on every pull request and on every
+# push to main.
 #
 # WHY THIS EXISTS
 #   GitHub Pages builds this site automatically, but only AFTER a merge to
@@ -9,14 +10,22 @@
 #   forward to the pull request, so a template error is caught before merge.
 #
 #   It does NOT deploy. Deployment remains the standard GitHub Pages build
-#   from the main branch; this job only proves the site compiles.
+#   from the main branch; this job only proves the site compiles and says
+#   what it is supposed to say.
+#
+# WHERE THE ASSERTIONS LIVE
+#   scripts/verify-site.sh, not here. Inline workflow shell cannot be run on
+#   a contributor's machine, so every failure would need a pull request to
+#   discover. The script is the whole check and runs identically in both
+#   places:
+#
+#       bundle exec jekyll build && ./scripts/verify-site.sh
 #
 # TIMEOUT
 #   The 5-minute limit is deliberate. A self-referential Liquid include
-#   (an {% include %} example left unescaped inside a template's own
-#   documentation header) does not raise an error — it recurses until the
-#   process exhausts memory. A hard timeout turns that hang into a fast,
-#   readable failure.
+#   (an include example left unescaped inside a template's own documentation
+#   header) does not raise an error — it recurses until the process exhausts
+#   memory. A hard timeout turns that hang into a fast, readable failure.
 
 name: Build
 
@@ -51,216 +60,5 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      - name: Verify both language pages were generated
-        run: |
-          test -f _site/index.html    || { echo "missing _site/index.html"; exit 1; }
-          test -f _site/de/index.html || { echo "missing _site/de/index.html"; exit 1; }
-          grep -q 'html lang="de"' _site/de/index.html \
-            || { echo "German page is not marked lang=de"; exit 1; }
-          echo "Both language pages built."
-
-      - name: Verify removed content is gone
-        run: |
-          ! grep -riq "restaurant" _site/      || { echo "Restaurant Speisekarte still referenced"; exit 1; }
-          ! grep -rq "Keglev/frontend" _site/  || { echo "old StockEase frontend repo still linked"; exit 1; }
-          echo "Removed content is absent."
-
-      - name: Verify the centred card is unique
-        run: |
-          count=$(grep -o 'card-centered' _site/index.html | wc -l)
-          [ "$count" -eq 1 ] || { echo "card-centered appears $count times, expected 1"; exit 1; }
-          echo "card-centered is applied to exactly one card."
-
-      - name: Verify the new project is present
-        run: |
-          grep -q 'maintenance-assistant' _site/index.html \
-            || { echo "Maintenance Assistant repository/docs link missing"; exit 1; }
-          grep -q 'maintenance.smartsupply.com.de' _site/index.html \
-            || { echo "Maintenance Assistant live demo link missing"; exit 1; }
-          echo "Maintenance Assistant is on the page."
-
-      # The order of the cards is a content decision, not an accident:
-      # the strongest project leads. Asserting it here means a reorder has
-      # to be deliberate rather than a side effect of editing page_body.
-      - name: Verify every card links a live demo
-        run: |
-          for url in "https://maintenance.smartsupply.com.de" \
-                     "https://bestandskontrolle.vercel.app" \
-                     "https://www.smartsupplypro.de"; do
-            grep -q "href=\"$url\"" _site/index.html \
-              || { echo "missing demo link: $url"; exit 1; }
-            grep -q "href=\"$url\"" _site/de/index.html \
-              || { echo "missing demo link on German page: $url"; exit 1; }
-          done
-          # The archived React frontend must never be linked: it still serves
-          # the unedited Vite starter title.
-          ! grep -rq "stockeasefrontend" _site/ \
-            || { echo "archived React frontend is linked"; exit 1; }
-          # Stale stack claims that were corrected in this change.
-          ! grep -rq "Spring Boot 3" _site/ \
-            || { echo "stale Spring Boot 3 reference"; exit 1; }
-
-          # Three demo ROWS per page. Matched on the kv-label element rather
-          # than on the words "Live demo", because the Maintenance Assistant
-          # status line also begins with them and would inflate the count.
-          en_rows=$(grep -o 'class="kv-label">Live demo<' _site/index.html | wc -l)
-          de_rows=$(grep -o 'class="kv-label">Live-Demo<' _site/de/index.html | wc -l)
-          [ "$en_rows" -eq 3 ] || { echo "EN page has $en_rows demo rows, expected 3"; exit 1; }
-          [ "$de_rows" -eq 3 ] || { echo "DE page has $de_rows demo rows, expected 3"; exit 1; }
-
-          # Demo link text drops the scheme and any trailing slash.
-          grep -q '>www.smartsupplypro.de<' _site/index.html \
-            || { echo "demo link text is malformed"; exit 1; }
-
-          echo "All three cards link a live demo."
-
-      - name: Verify card order
-        run: |
-          # Match only the leading ASCII word of each title. The titles
-          # contain em dashes, and cutting them by character count splits a
-          # multibyte sequence and produces an unstable comparison string.
-          order=$(grep -o '<h3>[A-Za-z]*' _site/index.html | sed 's|<h3>||' | paste -sd'|')
-          echo "order: $order"
-          # "AI" is the leading word of "AI Maintenance Assistant".
-          [ "$order" = "AI|StockEase|SmartSupplyPro" ] \
-            || { echo "unexpected card order"; exit 1; }
-          echo "Card order is correct."
-
-      - name: Verify the AI Maintenance Assistant card leads in both languages
-        run: |
-          head -1 <(grep -o "<h3>[^<]*</h3>" _site/index.html) \
-            | grep -q "AI Maintenance Assistant" \
-            || { echo "English page does not lead with the AI Maintenance Assistant"; exit 1; }
-          head -1 <(grep -o "<h3>[^<]*</h3>" _site/de/index.html) \
-            | grep -q "KI-Wartungsassistent" \
-            || { echo "German page does not lead with the KI-Wartungsassistent"; exit 1; }
-          ! grep -rq "API layer expanding" _site/ \
-            || { echo "superseded StockEase status still present"; exit 1; }
-          ! grep -rq "API-Schicht im Ausbau" _site/ \
-            || { echo "superseded German StockEase status still present"; exit 1; }
-          echo "Card titles and StockEase status are current."
-
-      # Badges are produced by splitting the `badges` string on commas, so
-      # this count is also what catches a comma INSIDE a badge name silently
-      # becoming two badges — which is exactly how "Llama 3.3 70B (IONOS, EU)"
-      # rendered as "Llama 3.3 70B (IONOS" and "EU)" before it was written
-      # with a middot. See the note in _includes/project_card.html.
-      - name: Verify badge counts per card
-        run: |
-          for page in _site/index.html _site/de/index.html; do
-            counts=$(awk '/<div class="card/{c++} /class="badge"/{n[c]++} END{printf "%d,%d,%d", n[1], n[2], n[3]}' "$page")
-            echo "$page -> $counts"
-            [ "$counts" = "13,13,12" ] \
-              || { echo "unexpected badge counts in $page"; exit 1; }
-          done
-          echo "Badge counts are 13, 13, 12 in grid order."
-
-      - name: Verify StockEase has exactly one repository link
-        run: |
-          # Count hrefs, not bare occurrences: every repository URL appears
-          # twice by design, once as the target and once as the link text.
-          count=$(grep -o 'href="https://github.com/Keglev/stockease"' _site/index.html | wc -l)
-          [ "$count" -eq 1 ] || { echo "stockease repo link appears $count times, expected 1"; exit 1; }
-          echo "StockEase links a single repository."
-
-      # Regression guard for the link-text filter. The previous version used
-      # `remove: '/'`, which deleted EVERY slash rather than the trailing
-      # one, rendering "keglev.github.ioinventory-service".
-      - name: Verify link text keeps internal slashes and drops the trailing one
-        run: |
-          grep -q '>keglev.github.io/inventory-service<' _site/index.html \
-            || { echo "docs link text is malformed"; exit 1; }
-          ! grep -q 'keglev.github.ioinventory-service' _site/index.html \
-            || { echo "every slash was stripped from the URL again"; exit 1; }
-          echo "Link text is correct."
-
-      # jekyll-seo-tag owns both. A hand-written duplicate in the layout is
-      # an easy mistake to reintroduce and search engines pick one at random.
-      - name: Verify one title and one canonical link per page
-        run: |
-          # Count closing title tags and full canonical link tags. Matching
-          # the opening forms would also match any prose in an HTML comment
-          # that happens to name them.
-          for page in _site/index.html _site/de/index.html; do
-            titles=$(grep -o '</title>' "$page" | wc -l)
-            canon=$(grep -o '<link rel="canonical"' "$page" | wc -l)
-            [ "$titles" -eq 1 ] || { echo "$page has $titles <title> tags, expected 1"; exit 1; }
-            [ "$canon" -eq 1 ] || { echo "$page has $canon canonical links, expected 1"; exit 1; }
-          done
-          echo "Exactly one title and one canonical link per page."
-
-      - name: Verify the German page is actually German
-        run: |
-          grep -q 'Wartungsassistent' _site/de/index.html \
-            || { echo "German page is missing translated project title"; exit 1; }
-          grep -q 'Projektdokumentation' _site/de/index.html \
-            || { echo "German page is missing translated section label"; exit 1; }
-          grep -q 'hreflang="en"' _site/de/index.html \
-            || { echo "German page does not link back to the English one"; exit 1; }
-          echo "German page is translated and links back to /."
-
-      - name: Verify the portfolio domain and the layout token
-        run: |
-          ! grep -rq "carloskeglevich.vercel.app" _site/ \
-            || { echo "old portfolio URL still present"; exit 1; }
-          for page in _site/index.html _site/de/index.html; do
-            grep -q 'href="https://carloskeglevich.de/"' "$page" \
-              || { echo "new portfolio URL missing in $page"; exit 1; }
-            grep -q 'linkedin.com/in/carloskeglevich' "$page" \
-              || { echo "LinkedIn URL was corrupted by a blind replace in $page"; exit 1; }
-          done
-          grep -q -- "--content-width" _site/assets/css/main.css \
-            || { echo "--content-width token missing"; exit 1; }
-          [ "$(grep -c 'max-width: min(var(--content-width), 94vw)' _site/assets/css/main.css)" -eq 2 ] \
-            || { echo ".wrapper and .site-header nav must both use --content-width"; exit 1; }
-          ! grep -q "max-width: 860px" _site/assets/css/main.css \
-            || { echo "an 860px cap survives"; exit 1; }
-          echo "Domain and layout token verified."
-
-      - name: Verify the hero is centred and the subtitle no longer denies
-        run: |
-          ! grep -rq "not from a tutorial" _site/ \
-            || { echo "English subtitle still ends with the denial"; exit 1; }
-          ! grep -rq "nicht von einem Tutorial" _site/ \
-            || { echo "German subtitle still ends with the denial"; exit 1; }
-          grep -q "covered by tests" _site/index.html \
-            || { echo "new English subtitle missing"; exit 1; }
-          grep -q "durch Tests abgedeckt" _site/de/index.html \
-            || { echo "new German subtitle missing"; exit 1; }
-          grep -q "justify-content: center" _site/assets/css/main.css \
-            || { echo ".hero-links centring missing"; exit 1; }
-          grep -q "max-width: 68ch" _site/assets/css/main.css \
-            || { echo "the hero measure was dropped"; exit 1; }
-          echo "Hero centring and subtitle verified."
-
-      # Guards the removals in the "remove dead code and config" change.
-      # Both are invisible in the rendered page, so nothing else would notice
-      # if they came back: jekyll-feed re-listed in _config.yml starts
-      # publishing an empty feed again, and the second-repository markup
-      # would only show up as an extra row on a card nobody is looking at.
-      - name: Verify removed capabilities stay removed
-        run: |
-          ! test -f _site/feed.xml \
-            || { echo "feed.xml is back — jekyll-feed re-enabled?"; exit 1; }
-          ! grep -rq 'kv-multi' _site/ \
-            || { echo "the second-repository markup is back"; exit 1; }
-          for page in _site/index.html _site/de/index.html; do
-            rows=$(grep -c 'class="kv-label"' "$page")
-            [ "$rows" -eq 9 ] \
-              || { echo "$page has $rows kv rows, expected 9 (3 per card)"; exit 1; }
-          done
-          echo "feed.xml absent, kv-multi gone, 9 kv rows per page."
-
-      # A key present in one language and missing in the other renders as an
-      # empty string, silently. This is the only check that catches it.
-      - name: Verify EN/DE catalogue parity
-        run: |
-          ruby -ryaml -e '
-            c = YAML.load_file("_data/i18n.yml")
-            en, de = c["en"].keys.sort, c["de"].keys.sort
-            missing_de = en - de
-            missing_en = de - en
-            abort("missing under de: #{missing_de.join(", ")}") unless missing_de.empty?
-            abort("missing under en: #{missing_en.join(", ")}") unless missing_en.empty?
-            puts "Catalogue parity: #{en.size} keys under both en and de."
-          '
+      - name: Verify the built site
+        run: ./scripts/verify-site.sh
