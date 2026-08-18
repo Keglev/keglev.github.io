@@ -39,7 +39,7 @@
    16. About strip            (.about-strip, .about-left, .about-links)
    17. Site footer            (.site-footer)
    18. Focus & motion         (:focus-visible, prefers-reduced-motion)
-   19. Responsive             (@media 900px, @media 620px, @media 420px)
+   19. Responsive             (@media 900px, 620px, 420px)
 
   SIZE WAIVER — one file, ~470 code lines, reviewed 2026-08-18.
   Above the 300-600 target but below the 800 alarm, and kept whole
