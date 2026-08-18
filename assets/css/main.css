@@ -84,6 +84,11 @@
             --radius:             12px;    /* Standard border radius        */
             --radius-sm:          8px;     /* Controls and small surfaces   */
 
+            /* Maximum content width, shared by .wrapper and the header nav so
+               the two stay aligned. See .wrapper (section 4) for why this is
+               capped rather than fluid all the way up. */
+            --content-width:      1320px;
+
             /* Tells the browser to render form controls and scrollbars in
                their dark variant, so native UI matches the page. */
             color-scheme: dark;
@@ -158,7 +163,11 @@
             background: var(--bg);
             color: var(--fg);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: 15px;
+            /* 16px base. Every size below is expressed in rem, so this one
+               value moves the whole scale. Raised from 15px because the card
+               descriptions at 0.875rem were rendering at 13.1px — small enough
+               that a reader skims instead of reading. */
+            font-size: 16px;
             line-height: 1.65;
             /* Softens the theme switch so it reads as a transition rather
                than a hard cut. Suppressed under prefers-reduced-motion,
@@ -172,7 +181,24 @@
            own max-width internally to stay aligned with the wrapper.
            ============================================================ */
         .wrapper {
-            max-width: 860px;
+            /* 860px was sized for a single column of prose. This page is a
+               two-column card grid, so on a laptop or an external monitor it
+               left roughly a third of the viewport empty on each side while
+               the cards themselves ran unnecessarily tall.
+
+               --content-width is the single knob (see section 1). At 1320px
+               each card is about 628px wide, which puts a card description at
+               roughly 69 characters per line — the top of the 45-75 range that
+               reads comfortably. Wider would fill more of a large monitor but
+               push the measure past the point where the eye loses its place
+               returning to the left margin, so the value is capped rather than
+               tied to the viewport. A 27-inch monitor keeps visible margins by
+               design; the aim is to stop wasting a third of a laptop screen,
+               not to fill every pixel.
+
+               min() keeps it fluid below the cap: on a 1024px tablet the
+               wrapper is 94vw and the cards simply narrow. */
+            max-width: min(var(--content-width), 94vw);
             margin: 0 auto;
             padding: 0 24px 60px;
         }
@@ -191,7 +217,9 @@
             z-index: 100;
         }
         .site-header nav {
-            max-width: 860px; /* Matches .wrapper for visual alignment */
+            /* Must track .wrapper exactly, or the brand and the header
+               controls stop aligning with the content beneath them. */
+            max-width: min(var(--content-width), 94vw);
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -347,15 +375,19 @@
             margin-bottom: 40px;
         }
         .hero h1 {
-            font-size: 1.65rem;
+            font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.01em;
             margin: 0 0 8px;
         }
         .hero p {
+            /* The lead paragraph is the first thing read, so it sits one step
+               above body copy. max-width is in ch rather than px so the
+               measure stays constant if the base font changes. */
+            font-size: 1.0625rem;
             color: var(--muted);
             margin: 0 0 20px;
-            max-width: 620px;
+            max-width: 68ch;
         }
         /* Row of pill-style navigation links (Portfolio, GitHub, LinkedIn) */
         .hero-links {
@@ -373,7 +405,7 @@
             box-shadow: var(--shadow);
             color: var(--link);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
             font-weight: 500;
             transition: border-color 0.15s, background 0.15s;
         }
@@ -388,7 +420,7 @@
            content sections (e.g. "PROJECT DOCUMENTATION").
            ============================================================ */
         .section-label {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -446,7 +478,7 @@
         }
         .card h3 {
             margin: 0 0 4px;
-            font-size: 1rem;
+            font-size: 1.0625rem;
             line-height: 1.4;
             color: var(--fg);
         }
@@ -454,7 +486,7 @@
            keeping badges consistently at the bottom of each card */
         .card p {
             color: var(--muted);
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
             margin: 0 0 14px;
             flex: 1;
         }
@@ -466,7 +498,7 @@
            ============================================================ */
         .card-label {
             display: inline-block;
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -499,7 +531,7 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             color: var(--green);
             font-weight: 600;
             margin-bottom: 10px;
@@ -525,7 +557,7 @@
             grid-template-columns: 90px auto;
             gap: 5px 10px;
             margin-bottom: 12px;
-            font-size: 0.8rem;
+            font-size: 0.8125rem;
         }
         .kv-label {
             color: var(--muted);
@@ -562,7 +594,7 @@
             padding-top: 4px;
         }
         .badge {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             padding: 3px 8px;
             border-radius: 999px;
             background: var(--badge-bg);
@@ -589,15 +621,18 @@
             margin-top: 40px;
         }
         .standards h2 {
-            font-size: 0.95rem;
+            font-size: 1.0625rem;
             font-weight: 700;
             margin: 0 0 10px;
         }
         .standards ul {
+            /* Unlike the cards, this block is full width, so the list needs
+               its own measure or the lines run the whole 1320px. */
+            max-width: 84ch;
             margin: 0;
             padding: 0 0 0 18px;
             color: var(--muted);
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
         }
         .standards li { margin-bottom: 6px; }
         .standards strong { color: var(--fg); }
@@ -638,7 +673,7 @@
             color: var(--fg);
         }
         .about-desc {
-            font-size: 0.8rem;
+            font-size: 0.8125rem;
             color: var(--muted);
         }
         /* Right side: quick links to portfolio, docs, and repository */
@@ -648,7 +683,7 @@
             flex-wrap: wrap;
         }
         .about-links a {
-            font-size: 0.8rem;
+            font-size: 0.8125rem;
             color: var(--link);
             text-decoration: none;
         }
@@ -664,7 +699,7 @@
             margin-top: 48px;
             padding-top: 20px;
             color: var(--muted);
-            font-size: 0.8rem;
+            font-size: 0.8125rem;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -705,15 +740,22 @@
 
         /* ============================================================
           19. RESPONSIVE
-           Below 620px: collapse grid to single column, reduce hero
-           font size, and stack footer and about-strip vertically.
+           Below 900px the two-column grid stops earning its keep: each
+           card falls under ~400px and the descriptions tower. The grid
+           collapses to one column there rather than at 620px, so a
+           tablet in portrait gets full-width cards instead of two
+           cramped ones.
+           Below 620px: reduce hero size, stack footer and about-strip.
            ============================================================ */
-        @media (max-width: 620px) {
+        @media (max-width: 900px) {
             .grid { grid-template-columns: 1fr; }
-            /* One column already: centring would only narrow the card. */
+            /* One column already — centring would only narrow the card. */
             .card-centered { max-width: 100%; }
+        }
+
+        @media (max-width: 620px) {
             .hero { padding-top: 36px; }
-            .hero h1 { font-size: 1.35rem; }
+            .hero h1 { font-size: 1.6rem; }
             .kv { grid-template-columns: 76px auto; }
             .about-strip { flex-direction: column; align-items: flex-start; }
             .site-footer { flex-direction: column; }
