@@ -23,8 +23,10 @@ Live at: https://keglev.github.io/ (English) · https://keglev.github.io/de/ (Ge
 ├── index.md                  # English entry point  (/)
 ├── de/
 │   └── index.md              # German entry point   (/de/)
+├── scripts/
+│   └── verify-site.sh        # All build assertions; runs in CI and locally
 ├── .github/workflows/
-│   └── build.yml             # Builds the site on every pull request
+│   └── build.yml             # Builds the site, then runs verify-site.sh
 ├── Gemfile                   # Ruby dependencies (pinned to GitHub Pages)
 └── README.md                 # This file
 ```
@@ -67,6 +69,17 @@ pins the versions, including Jekyll 3.10 and Liquid 4.0.
 
 Every pull request runs the same build in CI (`.github/workflows/build.yml`), so
 a template error is caught before merge rather than after deployment.
+
+The assertions live in `scripts/verify-site.sh`, not inside the workflow, so you
+can run exactly what CI runs before opening a pull request:
+
+```bash
+bundle exec jekyll build && ./scripts/verify-site.sh
+```
+
+Several assertions pin a number — three demo rows, the badge counts per card,
+one centred card. Adding or removing a project makes them fail, which is the
+point: the failure forces the change to be deliberate.
 
 ## Adding a New Project
 
